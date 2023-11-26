@@ -7,6 +7,7 @@
     #include <Windows.h>
 #endif
 
+// To do: make it that it works on "C" too.
 #ifdef _LUL_EXPORTS
     #define LUL_DLL __declspec(dllexport)
 #else
@@ -16,6 +17,11 @@
 #pragma region Standard lib includes
     #include <string>
     #include <stdexcept>
+    #include <memory>
+    #include <queue>
+    #include <fstream>
+    #include <chrono>
+    #include <thread>
 #pragma endregion 
 
 #pragma region Engine definitions
@@ -29,10 +35,9 @@
 #pragma endregion
 
 #pragma region Compiler error suppression
-#pragma warning ( push )
-// Warning	C4251	class needs to have dll - interface to be used by clients of class 
-
-#pragma warning ( disable : 4251)
+    #pragma warning ( push )
+    // Warning	C4251	class needs to have dll - interface to be used by clients of class 
+    #pragma warning ( disable : 4251)
 #pragma endregion
 
 #pragma region Engine includes
@@ -40,8 +45,11 @@
     #ifdef _WIN64
         #include "Exceptions/Handling/ExceptHandlWin64.h"
     #endif // _WIN64
+
+    #include "Math/Time.hpp"
     
     #include "Core/AppProperties.hpp"
+    #include "Core/Logger.hpp"
 #pragma endregion
 
 #pragma warning ( pop )

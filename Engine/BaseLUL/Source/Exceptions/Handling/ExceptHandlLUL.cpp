@@ -10,6 +10,11 @@ void LUL::Except::Internal(const int32_t& exceptCode)
             throw "LUL_EXCEPT_INTERNAL_NOT_IMPL";
         }
 
+        case ( LUL_EXCEPT_INTERNAL_LOG_ACCESS_VIOL ):
+        {
+
+        }
+
         default:
         {
             // L_LOG(LERR, L"THROW UNKOWN EXECPTION");
