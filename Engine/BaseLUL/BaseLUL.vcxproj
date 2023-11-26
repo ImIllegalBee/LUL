@@ -101,11 +101,15 @@
     <ClInclude Include="Source\BaseLUL.h" />
     <ClInclude Include="Source\Core\AppProperties.hpp" />
     <ClInclude Include="Source\EntryPoint\Win64\EntryPoint.hpp" />
+    <ClInclude Include="Source\Exceptions\Handling\ExceptHandlLUL.h" />
+    <ClInclude Include="Source\Exceptions\Handling\ExceptHandlWin64.h" />
     <ClInclude Include="Source\Interfaces\IApplication.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\BaseLUL.cpp" />
     <ClCompile Include="Source\Core\AppProperties.cpp" />
+    <ClCompile Include="Source\Exceptions\Handling\ExceptHandlLUL.cpp" />
+    <ClCompile Include="Source\Exceptions\Handling\ExceptHandlWin64.cpp" />
     <ClCompile Include="Source\Interfaces\IApplication.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

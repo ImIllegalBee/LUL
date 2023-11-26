@@ -34,6 +34,18 @@
     <Filter Include="Public\EntryPoint\Win64">
       <UniqueIdentifier>{c8a420aa-b5e6-488c-a19a-0e80d2ea3c17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Private\Exceptions">
+      <UniqueIdentifier>{c9f76209-b233-4d84-988c-ec51e77ccaf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Exceptions\Handling">
+      <UniqueIdentifier>{36221629-d3c3-425b-978a-79d519fa0575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Exceptions">
+      <UniqueIdentifier>{202fbe02-e28d-42c5-b19c-89e0ce522b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Exceptions\Handling">
+      <UniqueIdentifier>{00a04ac6-0447-4c46-a2a1-5f1cc39512c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\BaseLUL.h">
@@ -48,6 +60,12 @@
     <ClInclude Include="Source\Interfaces\IApplication.hpp">
       <Filter>Public\Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Exceptions\Handling\ExceptHandlLUL.h">
+      <Filter>Public\Exceptions\Handling</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Exceptions\Handling\ExceptHandlWin64.h">
+      <Filter>Public\Exceptions\Handling</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\BaseLUL.cpp">
@@ -58,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="Source\Core\AppProperties.cpp">
       <Filter>Private\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Exceptions\Handling\ExceptHandlLUL.cpp">
+      <Filter>Private\Exceptions\Handling</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Exceptions\Handling\ExceptHandlWin64.cpp">
+      <Filter>Private\Exceptions\Handling</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
