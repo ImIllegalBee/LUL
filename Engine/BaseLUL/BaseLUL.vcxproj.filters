@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Public">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Private">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{c89b6898-b08a-46c4-8e98-2cf273b276b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Core">
+      <UniqueIdentifier>{620e971e-04c2-4565-bb3a-d738926284cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Interfaces">
+      <UniqueIdentifier>{bf2ef498-9aea-45f9-bac9-7b3b55bc7c45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Core">
+      <UniqueIdentifier>{d72af2b2-25d7-43c4-822e-10002844f7c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Interfaces">
+      <UniqueIdentifier>{69c4abdb-3f87-41ee-9f1d-5a29fb1bc707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\EntryPoint">
+      <UniqueIdentifier>{7971449c-556a-4be2-b60d-d070ad48a9f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\EntryPoint\Win64">
+      <UniqueIdentifier>{c8a420aa-b5e6-488c-a19a-0e80d2ea3c17}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\BaseLUL.h">
+      <Filter>PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntryPoint\Win64\EntryPoint.hpp">
+      <Filter>Public\EntryPoint\Win64</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\AppProperties.hpp">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Interfaces\IApplication.hpp">
+      <Filter>Public\Interfaces</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\BaseLUL.cpp">
+      <Filter>PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Interfaces\IApplication.cpp">
+      <Filter>Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\AppProperties.cpp">
+      <Filter>Private\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
