@@ -28,6 +28,13 @@
     #define LUL_PATH 260
 #pragma endregion
 
+#pragma region Compiler error suppression
+#pragma warning ( push )
+// Warning	C4251	class needs to have dll - interface to be used by clients of class 
+
+#pragma warning ( disable : 4251)
+#pragma endregion
+
 #pragma region Engine includes
     #include "Exceptions/Handling/ExceptHandlLUL.h"
     #ifdef _WIN64
@@ -36,3 +43,5 @@
     
     #include "Core/AppProperties.hpp"
 #pragma endregion
+
+#pragma warning ( pop )

@@ -110,8 +110,9 @@ bool LUL::AppProperties::MakeDir(IN const std::wstring& path) const
     if (result)
         return result;
 
-    LUL::Except::Win64::FromLastError();
-    return;
+    bool isGood = false;
+    LUL::Except::Win64::FromLastError(&isGood);
+    return isGood;
 
     #endif // _WIN64
 

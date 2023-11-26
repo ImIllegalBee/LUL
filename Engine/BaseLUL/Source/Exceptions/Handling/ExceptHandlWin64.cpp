@@ -1,6 +1,6 @@
 #include "BaseLUL.h"
 
-void LUL::Except::Win64::FromLastError()
+void LUL::Except::Win64::FromLastError(OPTIONAL OUT bool* isGood)
 {
     DWORD error = GetLastError();
 
@@ -10,6 +10,7 @@ void LUL::Except::Win64::FromLastError()
         {
             // L_Log(LWARN, L"CreateDirectory: ERROR_ALREADY_EXISTS");
 
+            *isGood = true;
             return;
         }
 
@@ -17,6 +18,7 @@ void LUL::Except::Win64::FromLastError()
         {
             // L_Log(LWARN, L"CreateDirectory: ERROR_PATH_NOT_FOUND");
 
+            *isGood = false;
             return;
         }
 
