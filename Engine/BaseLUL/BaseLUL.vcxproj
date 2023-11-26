@@ -44,12 +44,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)\Bin$(PlatformArchitecture)\Engine\$(Configuration)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)\Obj$(PlatformArchitecture)\Engine\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)Bin$(PlatformArchitecture)\Engine\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)Obj$(PlatformArchitecture)\Engine\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)\Bin$(PlatformArchitecture)\Engine\$(Configuration)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)\Obj$(PlatformArchitecture)\Engine\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)Bin$(PlatformArchitecture)\Engine\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)Obj$(PlatformArchitecture)\Engine\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -67,6 +67,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent />
+    <PostBuildEvent>
+      <Command>powershell.exe -file $(SolutionDir)Scripts\PostBuildDll.ps1 -dll $(TargetName) -src $(OutputPath)$(TargetName).dll -dst D:\Repositories\ImIllegalBee\Public\LUL\Bin64\Projects\Debug</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -88,6 +92,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent />
+    <PostBuildEvent>
+      <Command>powershell.exe -file $(SolutionDir)Scripts\PostBuildDll.ps1 -dll $(TargetName) -src $(OutputPath)$(TargetName).dll -dst D:\Repositories\ImIllegalBee\Public\LUL\Bin64\Projects\Debug</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Source\BaseLUL.h" />
