@@ -29,7 +29,6 @@ INT CALLBACK WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, INT cmd
         }
 
         app->Update();
-        break;
     }
 
     app->Destroy();

@@ -47,8 +47,11 @@
         #include "Exceptions/Handling/ExceptHandlWin64.h"
     #endif // _WIN64
 
+    #include "Core/Types.hpp"
+
     #include "Math/Time.hpp"
 
+    #include "Interfaces/IUnknown.hpp"
     #include "Interfaces/IInitialable.hpp"
     #include "Interfaces/IDestroyable.hpp"
 

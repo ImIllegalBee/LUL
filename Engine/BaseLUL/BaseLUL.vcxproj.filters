@@ -93,6 +93,15 @@
     <ClInclude Include="Source\Interfaces\IInitialable.hpp">
       <Filter>Public\Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Interfaces\IUnknown.hpp">
+      <Filter>Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Interfaces\IWindow.hpp">
+      <Filter>Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Types.hpp">
+      <Filter>Public\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\BaseLUL.cpp">
@@ -124,6 +133,15 @@
     </ClCompile>
     <ClCompile Include="Source\Interfaces\IInitialable.cpp">
       <Filter>Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Interfaces\IUnknown.cpp">
+      <Filter>Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Interfaces\IWindow.cpp">
+      <Filter>Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Types.cpp">
+      <Filter>Private\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

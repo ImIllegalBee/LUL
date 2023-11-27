@@ -101,6 +101,7 @@
     <ClInclude Include="Source\BaseLUL.h" />
     <ClInclude Include="Source\Core\AppProperties.hpp" />
     <ClInclude Include="Source\Core\Logger.hpp" />
+    <ClInclude Include="Source\Core\Types.hpp" />
     <ClInclude Include="Source\EntryPoint\Win64\EntryPoint.hpp" />
     <ClInclude Include="Source\Exceptions\Handling\ExceptHandlLUL.h" />
     <ClInclude Include="Source\Exceptions\Handling\ExceptHandlWin64.h" />
@@ -108,18 +109,23 @@
     <ClInclude Include="Source\Interfaces\IApplication.hpp" />
     <ClInclude Include="Source\Interfaces\IDestroyable.hpp" />
     <ClInclude Include="Source\Interfaces\IInitialable.hpp" />
+    <ClInclude Include="Source\Interfaces\IUnknown.hpp" />
+    <ClInclude Include="Source\Interfaces\IWindow.hpp" />
     <ClInclude Include="Source\Math\Time.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\BaseLUL.cpp" />
     <ClCompile Include="Source\Core\AppProperties.cpp" />
     <ClCompile Include="Source\Core\Logger.cpp" />
+    <ClCompile Include="Source\Core\Types.cpp" />
     <ClCompile Include="Source\Exceptions\Handling\ExceptHandlLUL.cpp" />
     <ClCompile Include="Source\Exceptions\Handling\ExceptHandlWin64.cpp" />
     <ClCompile Include="Source\Global\GlobalLUL.cpp" />
     <ClCompile Include="Source\Interfaces\IApplication.cpp" />
     <ClCompile Include="Source\Interfaces\IDestroyable.cpp" />
     <ClCompile Include="Source\Interfaces\IInitialable.cpp" />
+    <ClCompile Include="Source\Interfaces\IUnknown.cpp" />
+    <ClCompile Include="Source\Interfaces\IWindow.cpp" />
     <ClCompile Include="Source\Math\Time.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
