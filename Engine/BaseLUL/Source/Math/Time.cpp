@@ -127,3 +127,94 @@ void LUL::Time::FmtToStr(OUT wchar_t* dest, IN size_t destSize, IN tm time, IN c
     if (dest[ destSize - 1 ] != '\0')
         dest[ destSize - 1 ] = '\0';
 }
+
+size_t ConvertWcharsToInt(const wchar_t* str, int8_t amnt)
+{
+    size_t result = 0;
+
+    for (int32_t i = 0; i < amnt; i++)
+    {
+        result *= 10;
+        result += str[ i ] - L'0';
+    }
+
+    return result;
+}
+
+LUL_DLL size_t LUL::Time::CompareTwoDateStr(IN const wchar_t* a, IN const wchar_t* b, IN const wchar_t* fmt)
+{
+    size_t countA = 0;
+    size_t countB = 0;
+
+    for (int32_t i = 0;; i++)
+    {
+        if (fmt[ i ] == '\0' ||
+            fmt[ i + 1 ] == '\0')
+            break;
+
+        if (fmt[ i ] != '%')
+            continue;
+
+        const wchar_t* pASubStrs = &a[ i ];
+        const wchar_t* pBSubStrs = &b[ i ];
+
+        switch (fmt[ i + 1 ])
+        {
+            // Escape from the formatting
+            case ( '%' ):
+            {
+                continue;
+            }
+
+            case ( 's' ):
+            {
+                countA += ConvertWcharsToInt(pASubStrs, 2);
+                countB += ConvertWcharsToInt(pBSubStrs, 2);
+
+                continue;
+            }
+
+            case ( 'm' ):
+            {
+                countA += ConvertWcharsToInt(pASubStrs, 2) * 60;
+                countB += ConvertWcharsToInt(pBSubStrs, 2) * 60;
+
+                continue;
+            }
+
+            case ( 'h' ):
+            {
+                countA += ConvertWcharsToInt(pASubStrs, 2) * 60 * 60;
+                countB += ConvertWcharsToInt(pBSubStrs, 2) * 60 * 60;
+
+                continue;
+            }
+
+            case ( 'D' ):
+            {
+                countA += ConvertWcharsToInt(pASubStrs, 2) * 60 * 60 * 24;
+                countB += ConvertWcharsToInt(pBSubStrs, 2) * 60 * 60 * 24;
+
+                continue;
+            }
+
+            case ( 'M' ):
+            {
+                countA += ConvertWcharsToInt(pASubStrs, 2) * 60 * 60 * 24 * 30;
+                countB += ConvertWcharsToInt(pBSubStrs, 2) * 60 * 60 * 24 * 30;
+
+                continue;
+            }
+
+            case ( 'Y' ):
+            {
+                countA += ConvertWcharsToInt(pASubStrs + 1, 3) * 60 * 60 * 24 * 30 * 12;
+                countB += ConvertWcharsToInt(pBSubStrs + 1, 3) * 60 * 60 * 24 * 30 * 12;
+
+                continue;
+            }
+        }
+    }
+
+    return countA - countB;
+}

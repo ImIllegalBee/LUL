@@ -61,7 +61,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>BaseLUL.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -84,7 +84,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>BaseLUL.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -104,6 +104,7 @@
     <ClInclude Include="Source\EntryPoint\Win64\EntryPoint.hpp" />
     <ClInclude Include="Source\Exceptions\Handling\ExceptHandlLUL.h" />
     <ClInclude Include="Source\Exceptions\Handling\ExceptHandlWin64.h" />
+    <ClInclude Include="Source\Global\GlobalLUL.hpp" />
     <ClInclude Include="Source\Interfaces\IApplication.hpp" />
     <ClInclude Include="Source\Math\Time.hpp" />
   </ItemGroup>
@@ -113,6 +114,7 @@
     <ClCompile Include="Source\Core\Logger.cpp" />
     <ClCompile Include="Source\Exceptions\Handling\ExceptHandlLUL.cpp" />
     <ClCompile Include="Source\Exceptions\Handling\ExceptHandlWin64.cpp" />
+    <ClCompile Include="Source\Global\GlobalLUL.cpp" />
     <ClCompile Include="Source\Interfaces\IApplication.cpp" />
     <ClCompile Include="Source\Math\Time.cpp" />
   </ItemGroup>

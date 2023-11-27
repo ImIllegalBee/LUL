@@ -1,8 +1,19 @@
 #pragma once
 
 #pragma region Log tag macros
-
+#define LPLAIN LUL::LogTags::Plain
+#define LINFO LUL::LogTags::Info
+#define LMESS LUL::LogTags::Message
+#define LWARN LUL::LogTags::Warning
+#define LERR LUL::LogTags::Error
+#define LCORR LUL::LogTags::Coruption
 #pragma endregion
+
+#ifdef _DEBUG
+    #define L_LOG(tag, fmt, ...) 
+#else
+    #define L_LOG(tag, fmt, ...) 
+#endif // _DEBUG
 
 namespace LUL
 {
@@ -20,7 +31,8 @@ namespace LUL
     {
     public:
 
-        Logger(IN const std::shared_ptr<LUL::AppProperties>& appCfg);
+        Logger(IN const std::shared_ptr<LUL::AppProperties>& appCfg,
+               IN const bool& isMultiThreaded = true);
 
         ~Logger();
 
@@ -38,17 +50,19 @@ namespace LUL
 
         /*
         * Logging on separate thread*/
-        void SpawnLoggingThread();
+        void SpawnSeparateThread();
+
+        void KillSeparateThread();
 
     private:
 
         /*
-        * Clean old logs */
-        void CleanOldLogs(IN const std::shared_ptr<LUL::AppProperties> appCfg);
+        * Clean old files */
+        void CleanOldFiles(IN const std::shared_ptr<LUL::AppProperties> appCfg);
 
         /*
-        * Clean old logs on detached thread, called in constructor */
-        void CleanOldLogsThreaded(IN const std::shared_ptr<LUL::AppProperties>& appCfg);
+        * Clean old file threaded, called in constructor */
+        void CleanOldFileThreaded(IN const std::shared_ptr<LUL::AppProperties>& appCfg);
 
         void FmtStrFromTag(OUT wchar_t* str,
                            IN const LogTags& tag,
@@ -58,7 +72,7 @@ namespace LUL
 
     private:
 
-        std::wstring m_LogDirPath = {};
+        std::wstring m_LogPath = {};
         std::wstring m_LogFileName = {};
 
         // If any of them are '0' then the check in CleaOldFiles is skipped.
@@ -67,6 +81,8 @@ namespace LUL
 
         // Used to retry logging in case of errors
         wchar_t m_LastBrokenBuff[ LUL_STRING_V_BIG ] = { 0 };
+
+        std::thread m_CleanOldThread = {};
 
         std::atomic_bool m_UseSeparateThread = false;
         std::shared_ptr<std::thread> m_SeparateThread = std::make_shared<std::thread>();

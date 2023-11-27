@@ -12,7 +12,30 @@ void LUL::Except::Internal(const int32_t& exceptCode)
 
         case ( LUL_EXCEPT_INTERNAL_LOG_ACCESS_VIOL ):
         {
+            using namespace std::chrono_literals;
 
+            static int16_t retries = 0;
+
+            if (retries >= 25)
+            {
+                #ifdef _WIN64
+                // Throw message box with error()
+                #endif // _WIN64
+
+                throw;
+            }
+            int16_t currentInstanceRetries = ++retries;
+
+            std::this_thread::sleep_for(500ms);
+
+            GetApp()->GetLogger()->RedoLastLog();
+
+            if (currentInstanceRetries != retries)
+                return;
+
+            // L_Log(LWARN, L"LUL_EXCEPTION_ACCESS_VIOLATION_LOGGER_FILE succeded after %d retry/ies", retries);
+            retries = 0;
+            return;
         }
 
         default:

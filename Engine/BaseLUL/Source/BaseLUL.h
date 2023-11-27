@@ -22,6 +22,7 @@
     #include <fstream>
     #include <chrono>
     #include <thread>
+    #include <filesystem>
 #pragma endregion 
 
 #pragma region Engine definitions
@@ -47,9 +48,13 @@
     #endif // _WIN64
 
     #include "Math/Time.hpp"
-    
+
     #include "Core/AppProperties.hpp"
     #include "Core/Logger.hpp"
+
+    #include "Interfaces/IApplication.hpp"
+
+    #include "Global/GlobalLUL.hpp"
 #pragma endregion
 
 #pragma warning ( pop )

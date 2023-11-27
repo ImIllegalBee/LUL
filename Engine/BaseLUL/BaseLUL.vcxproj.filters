@@ -52,6 +52,12 @@
     <Filter Include="Public\Math">
       <UniqueIdentifier>{6e105dae-c9a1-4246-a5ca-5edf6abf990f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Private\Global">
+      <UniqueIdentifier>{92d1588b-965b-451c-951f-47b0ace09f0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Global">
+      <UniqueIdentifier>{631c9e63-fbc8-4b9a-89e2-f112ce263258}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\BaseLUL.h">
@@ -78,13 +84,13 @@
     <ClInclude Include="Source\Math\Time.hpp">
       <Filter>Public\Math</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Global\GlobalLUL.hpp">
+      <Filter>Public\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\BaseLUL.cpp">
       <Filter>PCH</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Interfaces\IApplication.cpp">
-      <Filter>Private\Interfaces</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\AppProperties.cpp">
       <Filter>Private\Core</Filter>
@@ -100,6 +106,12 @@
     </ClCompile>
     <ClCompile Include="Source\Math\Time.cpp">
       <Filter>Private\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Global\GlobalLUL.cpp">
+      <Filter>Private\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Interfaces\IApplication.cpp">
+      <Filter>Private\Interfaces</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

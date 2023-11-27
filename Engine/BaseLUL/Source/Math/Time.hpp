@@ -9,7 +9,7 @@ namespace LUL::Time
     /*
     * Formats string with time values
     * Copies every non format char
-    * Destination doesn't have to be empty, 
+    * Destination doesn't have to be empty,
     * format appends to string
     * %%   - escapes format, places percent symbol
     * %s   - seconds
@@ -31,10 +31,10 @@ namespace LUL::Time
                                  IN const size_t formatSize)
     {
         return LUL::Time::FmtToStr(dest,
-                                    destSize,
-                                    time,
-                                    format,
-                                    formatSize);
+                                   destSize,
+                                   time,
+                                   format,
+                                   formatSize);
     }
 
     template <size_t formatSize>
@@ -44,10 +44,10 @@ namespace LUL::Time
                                  IN wchar_t(&format)[ formatSize ])
     {
         return LUL::Time::FmtToStr(dest,
-                                    destSize,
-                                    time,
-                                    format,
-                                    formatSize);
+                                   destSize,
+                                   time,
+                                   format,
+                                   formatSize);
     }
 
 
@@ -57,11 +57,15 @@ namespace LUL::Time
                                  IN wchar_t(&format)[ formatSize ])
     {
         return LUL::Time::FmtToStr(dest,
-                                    destSize,
-                                    time,
-                                    format,
-                                    formatSize);
+                                   destSize,
+                                   time,
+                                   format,
+                                   formatSize);
     }
 
     #pragma endregion
+
+    LUL_DLL inline size_t CompareTwoDateStr(IN const wchar_t* a,
+                                            IN const wchar_t* b,
+                                            IN const wchar_t* fmt);
 }

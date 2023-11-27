@@ -8,7 +8,7 @@ void LUL::Except::Win64::FromLastError(OPTIONAL OUT bool* isGood)
     {
         case ( ERROR_ALREADY_EXISTS ):
         {
-            // L_Log(LWARN, L"CreateDirectory: ERROR_ALREADY_EXISTS");
+            L_LOG(LWARN, L"CreateDirectory: ERROR_ALREADY_EXISTS");
 
             *isGood = true;
             return;
@@ -16,7 +16,7 @@ void LUL::Except::Win64::FromLastError(OPTIONAL OUT bool* isGood)
 
         case ( ERROR_PATH_NOT_FOUND ):
         {
-            // L_Log(LWARN, L"CreateDirectory: ERROR_PATH_NOT_FOUND");
+            L_LOG(LWARN, L"CreateDirectory: ERROR_PATH_NOT_FOUND");
 
             *isGood = false;
             return;
