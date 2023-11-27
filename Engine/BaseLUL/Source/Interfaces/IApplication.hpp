@@ -1,10 +1,12 @@
 #pragma once
 
-#define DECLARE_APPLICATION(appliactionClass) LUL_::IApplication* LUL_::EntryApplication() { return new appliactionClass; }
+#define DECLARE_APPLICATION(appliactionClass) LUL::IApplication* LUL::EntryApplication() { return new appliactionClass; }
 
 namespace LUL
 {
-    class LUL_DLL IApplication
+    class LUL_DLL IApplication :
+        public LUL::IInitialable,
+        public LUL::IDestroyable
     {
         
         friend LUL::AppProperties;
@@ -20,11 +22,7 @@ namespace LUL
             m_pLogg->Log(LINFO, L"Create application");
         };
 
-        ~IApplication()
-        {
-            m_pLogg->Log(LINFO, L"Destroy application");
-            Sleep(1000);
-        }
+        ~IApplication() = default;
 
     public:
         

@@ -49,6 +49,9 @@
 
     #include "Math/Time.hpp"
 
+    #include "Interfaces/IInitialable.hpp"
+    #include "Interfaces/IDestroyable.hpp"
+
     #include "Core/AppProperties.hpp"
     #include "Core/Logger.hpp"
 

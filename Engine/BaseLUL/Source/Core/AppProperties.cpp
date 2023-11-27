@@ -133,7 +133,7 @@ void LUL::AppProperties::FindCreatePathLocalAppData()
     CoTaskMemFree(appDataPath);
     m_AppDataPath += L"\\ImIllegalBee\\";
 
-
+    MakeDir(m_AppDataPath);
 
     return;
     #endif // _WIN64

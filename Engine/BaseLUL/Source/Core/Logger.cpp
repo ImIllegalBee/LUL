@@ -45,11 +45,16 @@ LUL::Logger::Logger(IN const std::shared_ptr<LUL::AppProperties>& appCfg,
         CleanOldFiles(appCfg);
 }
 
-LUL::Logger::~Logger()
+void LUL::Logger::Logger::Destroy()
 {
     if (m_UseSeparateThread.load() ||
         m_SeparateThread->joinable())
     {
+        while (!m_SepareteThreadFIFOQueue->empty())
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
+
         m_UseSeparateThread.store(false);
 
         m_SeparateThread->join();
@@ -253,7 +258,7 @@ void LUL::Logger::LoggingLoop()
     {
         if (m_SepareteThreadFIFOQueue->empty())
         {
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(450));
             continue;
         }
 

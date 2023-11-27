@@ -8,16 +8,16 @@
 
 INT CALLBACK WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, INT cmdshow)
 {
-    // auto app = ::EntryApplication();
-    // LUL_::SetApp(app);
+    auto app = LUL::EntryApplication();
+    LUL::SetApp(app);
 
-    // if (!GetApp())
-    // {
-    //     MessageBox(NULL, L"Application was null!", L"Error at initialization!", MB_ICONEXCLAMATION | MB_OK);
-    //     return -1;
-    // }
+    if (!LUL::GetApp())
+    {
+        MessageBox(NULL, L"Application was null!", L"Error at initialization!", MB_ICONEXCLAMATION | MB_OK);
+        return -1;
+    }
 
-    // app->Init();
+    app->Init();
 
     MSG msg = { 0 };
     while (msg.message != WM_QUIT)
@@ -28,10 +28,11 @@ INT CALLBACK WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, INT cmd
             DispatchMessage(&msg);
         }
 
-        // app->Update();
+        app->Update();
+        break;
     }
 
-    // app->Destroy();
+    app->Destroy();
     return 0;
 }
 

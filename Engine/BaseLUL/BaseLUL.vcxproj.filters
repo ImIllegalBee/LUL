@@ -87,6 +87,12 @@
     <ClInclude Include="Source\Global\GlobalLUL.hpp">
       <Filter>Public\Global</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Interfaces\IDestroyable.hpp">
+      <Filter>Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Interfaces\IInitialable.hpp">
+      <Filter>Public\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\BaseLUL.cpp">
@@ -111,6 +117,12 @@
       <Filter>Private\Global</Filter>
     </ClCompile>
     <ClCompile Include="Source\Interfaces\IApplication.cpp">
+      <Filter>Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Interfaces\IDestroyable.cpp">
+      <Filter>Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Interfaces\IInitialable.cpp">
       <Filter>Private\Interfaces</Filter>
     </ClCompile>
   </ItemGroup>

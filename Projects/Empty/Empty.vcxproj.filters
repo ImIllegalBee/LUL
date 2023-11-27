@@ -13,5 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Private\Entry">
+      <UniqueIdentifier>{2f565bbc-d51c-451e-a550-9b36f6e4aa3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Entry">
+      <UniqueIdentifier>{d3286a21-5055-4504-8f37-4a690b0ecb41}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Entry\Application.cpp">
+      <Filter>Private\Entry</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Entry\Application.hpp">
+      <Filter>Public\Entry</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

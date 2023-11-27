@@ -106,6 +106,8 @@
     <ClInclude Include="Source\Exceptions\Handling\ExceptHandlWin64.h" />
     <ClInclude Include="Source\Global\GlobalLUL.hpp" />
     <ClInclude Include="Source\Interfaces\IApplication.hpp" />
+    <ClInclude Include="Source\Interfaces\IDestroyable.hpp" />
+    <ClInclude Include="Source\Interfaces\IInitialable.hpp" />
     <ClInclude Include="Source\Math\Time.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +118,8 @@
     <ClCompile Include="Source\Exceptions\Handling\ExceptHandlWin64.cpp" />
     <ClCompile Include="Source\Global\GlobalLUL.cpp" />
     <ClCompile Include="Source\Interfaces\IApplication.cpp" />
+    <ClCompile Include="Source\Interfaces\IDestroyable.cpp" />
+    <ClCompile Include="Source\Interfaces\IInitialable.cpp" />
     <ClCompile Include="Source\Math\Time.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
