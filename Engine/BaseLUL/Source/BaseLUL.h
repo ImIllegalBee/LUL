@@ -35,9 +35,9 @@
     #define LUL_PATH 260
 #pragma endregion
 
-#pragma region Compiler error suppression
+#pragma region Compiler warnings suppression
     #pragma warning ( push )
-    // Warning	C4251	class needs to have dll - interface to be used by clients of class 
+    // Warning C4251 class needs to have dll - interface to be used by clients of class 
     #pragma warning ( disable : 4251)
 #pragma endregion
 

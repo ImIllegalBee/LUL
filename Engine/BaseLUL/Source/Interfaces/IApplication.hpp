@@ -38,6 +38,7 @@ namespace LUL
         
         const std::shared_ptr<AppProperties> m_pAppCfg = std::shared_ptr<AppProperties>(nullptr);
         const std::shared_ptr<Logger> m_pLogg = std::shared_ptr<Logger>(nullptr);
+
     };
 
     IApplication* EntryApplication();

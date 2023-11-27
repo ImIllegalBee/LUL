@@ -6,6 +6,7 @@
 class Application : public LUL::IApplication
 {
 public:
+
     Application() :
         IApplication(L"EmptyProject",
                      L"EmptyClassProject")
@@ -14,9 +15,11 @@ public:
     ~Application() = default;
 
 public:
+
     virtual void Init() override;
 
     virtual void Update() override;
 
     virtual void Destroy() override;
+
 };
