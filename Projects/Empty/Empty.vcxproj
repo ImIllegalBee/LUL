@@ -92,9 +92,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Entry\Application.cpp" />
+    <ClCompile Include="Source\Windows\MainWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Entry\Application.hpp" />
+    <ClInclude Include="Source\Windows\MainWindow.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

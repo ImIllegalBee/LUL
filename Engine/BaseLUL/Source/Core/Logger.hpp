@@ -27,8 +27,7 @@ namespace LUL
         Coruption
     };
 
-    class LUL_DLL Logger :
-        public LUL::IDestroyable
+    class LUL_DLL Logger
     {
     public:
 
@@ -36,10 +35,6 @@ namespace LUL
                IN const bool& isMultiThreaded = true);
 
         ~Logger() = default;
-
-    public:
-
-        virtual void Destroy() override;
 
     public:
 

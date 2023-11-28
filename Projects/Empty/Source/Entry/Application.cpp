@@ -6,12 +6,12 @@ void Application::Init()
 {
     m_pLogg->SpawnSeparateThread();
 
+    m_MainWindow.Init();
 
 };
 
 void Application::Update()
 {
-    Sleep(1000);
 }
 
 void Application::Destroy()
@@ -20,5 +20,5 @@ void Application::Destroy()
 
 
 
-    m_pLogg->Destroy();
+    m_pLogg->KillSeparateThread();
 }

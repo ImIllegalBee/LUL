@@ -29,7 +29,7 @@ namespace LUL
     // Just for fun section ---------------------------------------------------
 
     template<typename T>
-    struct LUL_DLL Vector
+    struct Vector
     {
     public:
         Vector()
@@ -116,18 +116,14 @@ namespace LUL
             m_PhysicalAllocMem += m_ReAllocPhysicalMemGrowth;
         }
 
-        /// <summary>
-        /// Set allocated memory index to zero.
-        /// Vector will overwrite data.
-        /// </summary>
+        // Set allocated memory index to zero.
+        // Vector will overwrite data.
         void Clear()
         {
             m_AllocedMem = 0;
         }
 
-        /// <summary>
-        /// Remake the buffer.
-        /// </summary>
+        // Remake the buffer.
         void Reset()
         {
             delete( m_Buff );
@@ -149,7 +145,7 @@ namespace LUL
     };
 
     template<typename T>
-    struct LUL_DLL LVec
+    struct LVec
     {
     public:
         LVec()
@@ -237,26 +233,16 @@ namespace LUL
             m_uMemSize += nextGrowth;
         }
 
-        /// <summary>
-        /// Set size to 0, so it will overwrite data inside
-        /// </summary>
+        // Set size to 0, so it will overwrite data inside
         void Reset()
         {
             m_uItems = 0;
         }
 
-        /// <summary>
-        /// Destroy and reset the buffer
-        /// </summary>
+        // Destroy and reset the buffer
         void Clear()
         {
-            // Destroy all blocks
-            // Starting from items
-            // Going to blocks for items
-            // Ending at blocks with ptrs
-
-            // Reinit
-            //Init();
+            //
         }
 
     public:

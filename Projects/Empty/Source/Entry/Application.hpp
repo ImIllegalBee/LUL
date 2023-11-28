@@ -2,6 +2,9 @@
 
 #include "BaseLUL.h"
 #include "EntryPoint/Win64/EntryPoint.hpp"
+#include "Interfaces/IWindow.hpp"
+
+#include "Windows/MainWindow.hpp"
 
 class Application : public LUL::IApplication
 {
@@ -21,5 +24,9 @@ public:
     virtual void Update() override;
 
     virtual void Destroy() override;
+
+private:
+
+    MainWindow m_MainWindow = {};
 
 };

@@ -33,6 +33,19 @@
     #define LUL_STRING_V_BIG    1024
     
     #define LUL_PATH 260
+
+    // Unit conversion 
+    #define SECONDS_TO_MILLISECONDS(x) (x * 1000)
+    #define SECONDS_TO_NANOSECONDS(x) (x * 1000000000)
+    
+    #define MILLISECONDS_TO_SECONDS(x) (x / 1000)
+    #define MILLISECONDS_TO_NANOSECONDS(x) (x * 1000000)
+    
+    #define NANOSECONDS_TO_SECONDS(x) (x / 1000000000)
+    #define NANOSECONDS_TO_MILLISECONDS(x) (x / 1000000)
+    
+    #define MEM_KB(x)   (x * 1024)
+    #define MEM_MB(x)   MEM_KB(x * 1024)
 #pragma endregion
 
 #pragma region Compiler warnings suppression

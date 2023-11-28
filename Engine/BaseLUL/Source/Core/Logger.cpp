@@ -45,22 +45,6 @@ LUL::Logger::Logger(IN const std::shared_ptr<LUL::AppProperties>& appCfg,
         CleanOldFiles(appCfg);
 }
 
-void LUL::Logger::Logger::Destroy()
-{
-    if (m_UseSeparateThread.load() ||
-        m_SeparateThread->joinable())
-    {
-        while (!m_SepareteThreadFIFOQueue->empty())
-        {
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        }
-
-        m_UseSeparateThread.store(false);
-
-        m_SeparateThread->join();
-    }
-}
-
 void LUL::Logger::Log(IN const LogTags tag, IN const wchar_t* fmt, ...) const
 {
     wchar_t fmtBuff[ LUL_STRING_BIG ] = { 0 };
@@ -117,7 +101,18 @@ void LUL::Logger::SpawnSeparateThread()
 
 void LUL::Logger::KillSeparateThread()
 {
-    m_UseSeparateThread.store(false);
+    if (m_UseSeparateThread.load() ||
+        m_SeparateThread->joinable())
+    {
+        while (!m_SepareteThreadFIFOQueue->empty())
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
+
+        m_UseSeparateThread.store(false);
+
+        m_SeparateThread->join();
+    }
 }
 
 // PRIVATE --------------------------------------------------------------------

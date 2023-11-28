@@ -19,15 +19,27 @@
     <Filter Include="Public\Entry">
       <UniqueIdentifier>{d3286a21-5055-4504-8f37-4a690b0ecb41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Private\Windows">
+      <UniqueIdentifier>{e04e1d2e-0b92-4890-8ffb-c49f034c61bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Windows">
+      <UniqueIdentifier>{2a266e31-0a84-4a0b-9256-bb55aa073d00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Entry\Application.cpp">
       <Filter>Private\Entry</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Windows\MainWindow.cpp">
+      <Filter>Private\Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Entry\Application.hpp">
       <Filter>Public\Entry</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Windows\MainWindow.hpp">
+      <Filter>Public\Windows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
