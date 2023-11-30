@@ -11,7 +11,7 @@ namespace LUL::Win64
     {
     public:
 
-        DXRenderer();
+        DXRenderer(HWND hwndRenderTarget);
 
         ~DXRenderer();
 

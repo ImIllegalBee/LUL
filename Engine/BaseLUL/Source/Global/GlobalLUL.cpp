@@ -50,4 +50,30 @@ const wchar_t* LUL::GetLogFileFmt()
     return _LogFileFmt;
 }
 
+void LUL::RunLiveLogger()
+{
+    #ifdef _WIN64
+
+    std::wstring cmdW = {};
+    cmdW += L"start ";
+    cmdW += AppProperties::Get()->GetAppCurPath().c_str();
+    cmdW += L"\\Tools\\LiveLogger.exe ";
+    cmdW += L"/Path \"";
+    cmdW += Logger::Get()->GetOutputFilePath();
+    cmdW += L"\"";
+    
+    #pragma warning ( push )
+    // warning C4244: 'argument': conversion from 'wchar_t' to 'const _Elem', possible loss of data
+    #pragma warning ( disable : 4244 )
+    system(std::string(cmdW.begin(), cmdW.end()).c_str());
+    #pragma warning ( pop )
+
+    L_LOG(LINFO, L"Launch LiveLogger from cmd ['%ls']", cmdW);
+    
+    return;
+    #endif // _WIN64
+
+    LUL::Except::Internal(LUL_EXCEPT_INTERNAL_NOT_IMPL);
+}
+
 #pragma endregion

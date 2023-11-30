@@ -136,6 +136,10 @@ void LUL::Logger::KillSeparateThread()
         }
 
         m_SeparateThread.join();
+    }
+
+    if (m_CleanOldThread.joinable())
+    {
         m_CleanOldThread.join();
     }
 }

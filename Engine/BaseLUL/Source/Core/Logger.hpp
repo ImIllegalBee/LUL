@@ -68,6 +68,12 @@ namespace LUL
 
         void KillSeparateThread();
 
+    public:
+
+        // Getters
+
+        const std::wstring& GetOutputFilePath() const { return m_LogPath; }
+
     private:
 
         /*

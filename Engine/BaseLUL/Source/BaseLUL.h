@@ -69,18 +69,16 @@
         #include "Exceptions/Handling/ExceptHandlWin64.h"
     #endif // _WIN64
 
-    #include "Core/Types.hpp"
-
-    #include "Math/Time.hpp"
-
     #include "Interfaces/IUnknown.hpp"
     #include "Interfaces/IInitialable.hpp"
     #include "Interfaces/IDestroyable.hpp"
+    #include "Interfaces/IApplication.hpp"
 
+    #include "Math/Time.hpp"
+
+    #include "Core/Types.hpp"
     #include "Core/AppProperties.hpp"
     #include "Core/Logger.hpp"
-
-    #include "Interfaces/IApplication.hpp"
 
     #include "Global/GlobalLUL.hpp"
     #include "Global/InternalAPI.hpp"

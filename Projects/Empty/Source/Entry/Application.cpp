@@ -11,6 +11,9 @@ void Application::Init()
     L_LOG(LINFO, L"Create application");
 
     m_MainWindow->Init();
+    m_Renderer = std::make_shared<LUL::Win64::DXRenderer>(m_MainWindow->GetHwnd());
+    m_Renderer->Init();
+
     m_SubWindow->Init();
 
 };

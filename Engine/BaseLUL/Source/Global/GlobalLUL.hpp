@@ -13,4 +13,6 @@ namespace LUL
     LUL_DLL void SetLogFileFmt(const wchar_t* fileFmt);
 
     LUL_DLL const wchar_t* GetLogFileFmt();
+
+    LUL_DLL void RunLiveLogger();
 }

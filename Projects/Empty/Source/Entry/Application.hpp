@@ -4,6 +4,9 @@
 #include "EntryPoint/Win64/EntryPoint.hpp"
 #include "Interfaces/IWindow.hpp"
 
+#include "3DLUL.h"
+#include "DirectX12/Renderer.hpp"
+
 #include "Windows/MainWindow.hpp"
 #include "Windows/SubWindow.hpp"
 
@@ -23,6 +26,10 @@ public:
     virtual void Update() override;
 
     virtual void Destroy() override;
+
+private:
+
+    std::shared_ptr<LUL::Win64::DXRenderer> m_Renderer = nullptr;
 
 private:
 

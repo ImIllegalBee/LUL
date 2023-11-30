@@ -1,7 +1,8 @@
 #include "3DLUL.h"
 #include "Renderer.hpp"
 
-LUL::Win64::DXRenderer::DXRenderer()
+LUL::Win64::DXRenderer::DXRenderer(HWND hwndRenderTarget) :
+    m_HWNDRenderTarget(hwndRenderTarget)
 {}
 
 LUL::Win64::DXRenderer::~DXRenderer()
