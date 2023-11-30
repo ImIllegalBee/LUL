@@ -8,17 +8,21 @@ void LUL::Except::Win64::FromLastError(OPTIONAL OUT bool* isGood)
     {
         case ( ERROR_ALREADY_EXISTS ):
         {
-            L_LOG(LWARN, L"CreateDirectory: ERROR_ALREADY_EXISTS");
+            // if (GetApp())
+            //     GetApp()->GetLogger()->Log(LWARN, L"CreateDirectory: ERROR_ALREADY_EXISTS");
 
-            *isGood = true;
+            if (isGood)
+                *isGood = true;
             return;
         }
 
         case ( ERROR_PATH_NOT_FOUND ):
         {
-            L_LOG(LWARN, L"CreateDirectory: ERROR_PATH_NOT_FOUND");
+            // if (GetApp())
+            //     GetApp()->GetLogger()->Log(LWARN, L"CreateDirectory: ERROR_PATH_NOT_FOUND");
 
-            *isGood = false;
+            if (isGood)
+                *isGood = false;
             return;
         }
 

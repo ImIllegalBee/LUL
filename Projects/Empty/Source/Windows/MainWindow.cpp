@@ -2,10 +2,10 @@
 
 void MainWindow::Init()
 {
-    this->Create(std::wstring(LUL::GetApp()->GetAppCfg()->GetAppName()).c_str(),
-                 std::wstring(LUL::GetApp()->GetAppCfg()->GetAppClass()).c_str());
+    // Create(LUL::GetApp()->GetAppCfg()->GetAppName().c_str(),
+    //        LUL::GetApp()->GetAppCfg()->GetAppClass().c_str());
 
-    this->Show();
+    Show();
 }
 
 LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -14,7 +14,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         case WM_DESTROY:
         {
-            L_LOG(LINFO, L"Close rendering window");
+            L_LOG(LINFO, L"Close MainWindow");
             PostQuitMessage(0);
             return 0;
         }

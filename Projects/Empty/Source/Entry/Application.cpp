@@ -4,9 +4,14 @@ DECLARE_APPLICATION(Application);
 
 void Application::Init()
 {
-    m_pLogg->SpawnSeparateThread();
+    LUL::AppProperties::Get()->Init({ 
+        L"An empty application", 
+        L"An application" });
 
-    m_MainWindow.Init();
+    L_LOG(LINFO, L"Create application");
+
+    m_MainWindow->Init();
+    m_SubWindow->Init();
 
 };
 
@@ -16,9 +21,5 @@ void Application::Update()
 
 void Application::Destroy()
 {
-    m_pLogg->AddToLogQueue(LINFO, L"Destroy application");
-
-
-
-    m_pLogg->KillSeparateThread();
+    L_LOG(LINFO, L"Destroy application");
 }

@@ -9,5 +9,6 @@ namespace LUL
         IUnknown() = default;
 
         ~IUnknown() = default;
+
     };
 }

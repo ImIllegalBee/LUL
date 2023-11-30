@@ -4,32 +4,77 @@
 #include <shlobj_core.h>
 #endif // _WIN64
 
-LUL::AppProperties::AppProperties(IN const std::wstring& appName, IN const std::wstring& appClass)
-{
-    if (appName.length() > m_AppName.length() ||
-        appClass.length() > m_AppClass.length())
-    {
-        throw std::invalid_argument("AppProperties: appName or appClass argument is too long");
-    }
+#include "Logger.hpp"
 
-    m_AppName = appName;
-    m_AppClass = appClass;
+LUL::AppSettings::AppSettings(std::initializer_list<std::wstring> settings)
+{
+    for (size_t i = 0; i < settings.size(); i++)
+    {
+        std::wstring arg = *( settings.begin() + i );
+
+        switch (i)
+        {
+            case ( 0 ):
+            {
+                AppName = arg.substr(0, AppName.length() - 1);
+
+                continue;
+            }
+
+            case ( 1 ):
+            {
+                AppClass = arg.substr(0, AppClass.length() - 1);
+
+                continue;
+            }
+
+            default:
+                return;
+        }
+    }
+}
+
+// AppProperties --------------------------------------------------------------
+
+LUL::AppProperties* LUL::AppProperties::Get()
+{
+    static AppProperties m_Instance;
+    return &m_Instance;
+}
+
+void LUL::AppProperties::Init(const AppSettings& yourSettings)
+{
+    // It's already initialized
+    if (!m_AppName.empty())
+        return;
+
+    m_AppName = yourSettings.AppName;
+    m_AppClass = yourSettings.AppClass;
+    yourSettings.~AppSettings();
 
     FindCreatePathLocalAppData();
     FindPathCurentDir();
+
+    Logger::Get()->Init();
 }
 
 bool LUL::AppProperties::MakeFileCurDir(IN const std::wstring& path) const
 {
+    if (!m_AppCurPath.length())
+        LUL::Except::Internal(LUL_EXCEPT_INTERNAL_INIT_ERR);
+
     return FindOrCreate(( m_AppCurPath + path ));
 }
 
 bool LUL::AppProperties::MakeFileAppData(IN const std::wstring& path) const
 {
+    if (!m_AppDataPath.length())
+        LUL::Except::Internal(LUL_EXCEPT_INTERNAL_INIT_ERR);
+
     return FindOrCreate(( m_AppDataPath + path ));
 }
 
-bool LUL::AppProperties::DoesExists(IN const std::wstring& path) const
+bool LUL::AppProperties::DoesExists(IN const std::wstring& path)
 {
     if (path.length() >= LUL_PATH)
         throw std::invalid_argument("AppProperties: DoesExists: path too long");
@@ -46,14 +91,14 @@ bool LUL::AppProperties::DoesExists(IN const std::wstring& path) const
     else
     {
         return ( dwAttrib != INVALID_FILE_ATTRIBUTES &&
-                ( dwAttrib & FILE_ATTRIBUTE_NORMAL ) );
+                ( dwAttrib &~ FILE_ATTRIBUTE_DIRECTORY ));
     }
     #endif // _WIN64
 
     LUL::Except::Internal(LUL_EXCEPT_INTERNAL_NOT_IMPL);
 }
 
-bool LUL::AppProperties::FindOrCreate(IN const std::wstring& path) const
+bool LUL::AppProperties::FindOrCreate(IN const std::wstring& path)
 {
     if (path.length() >= LUL_PATH)
         throw std::invalid_argument("AppProperties: FindOrCreate: path too long");
@@ -72,14 +117,14 @@ bool LUL::AppProperties::FindOrCreate(IN const std::wstring& path) const
         // It's a file
         if (DoesExists(path))
             return true;
-        
+
         return MakeFile(path);
     }
 }
 
 // PRIVATE --------------------------------------------------------------------
 
-bool LUL::AppProperties::MakeFile(IN const std::wstring& path) const
+bool LUL::AppProperties::MakeFile(IN const std::wstring& path)
 {
     #ifdef _WIN64
     HANDLE file = CreateFile(path.c_str(),
@@ -101,11 +146,11 @@ bool LUL::AppProperties::MakeFile(IN const std::wstring& path) const
     LUL::Except::Internal(LUL_EXCEPT_INTERNAL_NOT_IMPL);
 }
 
-bool LUL::AppProperties::MakeDir(IN const std::wstring& path) const
+bool LUL::AppProperties::MakeDir(IN const std::wstring& path)
 {
     #ifdef _WIN64
     auto result = CreateDirectory(path.c_str(), NULL);
-    
+
     // Operation was successful
     if (result)
         return result;

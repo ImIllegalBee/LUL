@@ -10,7 +10,7 @@
 #pragma endregion
 
 #ifdef _DEBUG
-    #define L_LOG(tag, fmt, ...) 
+    #define L_LOG(tag, fmt, ...) LUL::ApiAddToLogQueue(tag, fmt, __VA_ARGS__)
 #else
     #define L_LOG(tag, fmt, ...) 
 #endif // _DEBUG
@@ -27,16 +27,30 @@ namespace LUL
         Coruption
     };
 
-    class LUL_DLL Logger
+    class LUL_DLL Logger :
+        public LUL::IInitialable
     {
     public:
 
-        Logger(IN const std::shared_ptr<LUL::AppProperties>& appCfg,
-               IN const bool& isMultiThreaded = true);
+        // Singleton
+
+        static Logger* Get();
+
+    private:
+
+        Logger() = default;
+
+    public:
+
+        Logger(Logger&) = delete;
+
+        void operator=(Logger&) = delete;
 
         ~Logger() = default;
 
     public:
+
+        virtual void Init() override;
 
         /*
         * Single thread logging */
@@ -58,11 +72,11 @@ namespace LUL
 
         /*
         * Clean old files */
-        void CleanOldFiles(IN const std::shared_ptr<LUL::AppProperties> appCfg);
+        void CleanOldFiles();
 
         /*
         * Clean old file threaded, called in constructor */
-        void CleanOldFileThreaded(IN const std::shared_ptr<LUL::AppProperties>& appCfg);
+        void CleanOldFileThreaded();
 
         void FmtStrFromTag(OUT wchar_t* str,
                            IN const LogTags& tag,

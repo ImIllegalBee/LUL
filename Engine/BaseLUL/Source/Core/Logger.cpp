@@ -1,13 +1,22 @@
 #include "BaseLUL.h"
 
-LUL::Logger::Logger(IN const std::shared_ptr<LUL::AppProperties>& appCfg,
-                    IN const bool& isMultiThreaded)
+LUL::Logger* LUL::Logger::Get()
+{
+    static Logger m_Instance;
+    return &m_Instance;
+}
+
+void LUL::Logger::Init()
 {
     namespace llt = LUL::Time;
 
+    // It's already initialized
+    if (!m_LogFileName.empty())
+        return;
+
     // Create Logs dir in appdata
     m_LogPath += L"Logs\\";
-    if (!appCfg->MakeFileAppData(m_LogPath))
+    if (!AppProperties::Get()->MakeFileAppData(m_LogPath))
         LUL::Except::Internal(LUL_EXCEPT_INTERNAL_INIT_ERR);
 
     // Create dir with current day as name in appdata
@@ -18,7 +27,7 @@ LUL::Logger::Logger(IN const std::shared_ptr<LUL::AppProperties>& appCfg,
                   LUL_STRING_V_SMALL);
     m_LogPath += dirName;
     m_LogPath += L"\\";
-    if (!appCfg->MakeFileAppData(m_LogPath))
+    if (!AppProperties::Get()->MakeFileAppData(m_LogPath))
         LUL::Except::Internal(LUL_EXCEPT_INTERNAL_INIT_ERR);
 
     // Create file in that dir
@@ -32,17 +41,22 @@ LUL::Logger::Logger(IN const std::shared_ptr<LUL::AppProperties>& appCfg,
     std::wstring tmpFullPath = {};
     tmpFullPath += m_LogPath;
     tmpFullPath += m_LogFileName;
-    if (!appCfg->MakeFileAppData(tmpFullPath))
+    if (!AppProperties::Get()->MakeFileAppData(tmpFullPath))
         LUL::Except::Internal(LUL_EXCEPT_INTERNAL_INIT_ERR);
 
-    m_LogPath = appCfg->GetAppDataPath();
+    m_LogPath = AppProperties::Get()->GetAppDataPath();
     m_LogPath += tmpFullPath;
 
 
-    if (isMultiThreaded)
-        CleanOldFileThreaded(appCfg);
+    if (LUL_IS_CORE_MULTITHREADED)
+    {
+        CleanOldFileThreaded();
+        SpawnSeparateThread();
+    }
     else
-        CleanOldFiles(appCfg);
+    {
+        CleanOldFiles();
+    }
 }
 
 void LUL::Logger::Log(IN const LogTags tag, IN const wchar_t* fmt, ...) const
@@ -117,13 +131,13 @@ void LUL::Logger::KillSeparateThread()
 
 // PRIVATE --------------------------------------------------------------------
 
-void LUL::Logger::CleanOldFiles(IN const std::shared_ptr<LUL::AppProperties> appCfg)
+void LUL::Logger::CleanOldFiles()
 {
     namespace fs = std::filesystem;
 
     wchar_t dir[ LUL_PATH ] = {};
 
-    wcscat_s(dir, appCfg->GetAppDataPath().c_str());
+    wcscat_s(dir, AppProperties::Get()->GetAppDataPath().c_str());
     wcscat_s(dir, L"Logs");
 
     wchar_t dateNow[ LUL_STRING_V_SMALL ] = { 0 };
@@ -150,7 +164,7 @@ void LUL::Logger::CleanOldFiles(IN const std::shared_ptr<LUL::AppProperties> app
 
             if (diff > deleteTreshold)
             {
-                L_LOG(LINFO, L"Removing log dir: %ls", (const wchar_t*) itm.path().c_str());
+                Log(LINFO, L"Removing log dir: %ls", (const wchar_t*) itm.path().c_str());
                 fs::remove_all(itm.path());
             }
         }
@@ -178,13 +192,13 @@ void LUL::Logger::CleanOldFiles(IN const std::shared_ptr<LUL::AppProperties> app
 
         if (diff > deleteTreshold)
         {
-            L_LOG(LINFO, L"Removing log file: %ls", (const wchar_t*) itm.path().c_str());
+            Log(LINFO, L"Removing log file: %ls", (const wchar_t*) itm.path().c_str());
             remove(itm.path());
         }
     }
 }
 
-void LUL::Logger::CleanOldFileThreaded(IN const std::shared_ptr<LUL::AppProperties>& appCfg)
+void LUL::Logger::CleanOldFileThreaded()
 {
     if (m_CleanOldThread.joinable())
     {
@@ -192,7 +206,7 @@ void LUL::Logger::CleanOldFileThreaded(IN const std::shared_ptr<LUL::AppProperti
         return;
     }
 
-    std::thread newThread(&LUL::Logger::CleanOldFiles, this, appCfg);
+    std::thread newThread(&LUL::Logger::CleanOldFiles, this);
     m_CleanOldThread.swap(newThread);
     newThread.~thread();
 }
@@ -259,7 +273,7 @@ void LUL::Logger::LoggingLoop()
 
         auto& first = m_SepareteThreadFIFOQueue->front();
 
-        wchar_t tagBuff[ LUL_STRING_SMALL ] = { 0 };
+        wchar_t tagBuff[ LUL_STRING_V_SMALL ] = { 0 };
 
         FmtStrFromTag(tagBuff, std::get<1>(first), std::get<0>(first));
 

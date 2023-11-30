@@ -7,7 +7,6 @@
     #include <Windows.h>
 #endif
 
-// To do: make it that it works on "C" too.
 #ifdef _LUL_EXPORTS
     #define LUL_DLL __declspec(dllexport)
 #else
@@ -46,6 +45,16 @@
     
     #define MEM_KB(x)   (x * 1024)
     #define MEM_MB(x)   MEM_KB(x * 1024)
+
+    /* 
+    * Controls if BaseLUL should use multithreaded
+    * versions of core components */
+    #define LUL_IS_CORE_MULTITHREADED true
+
+#ifdef _WIN64
+    #define	HInstance() GetModuleHandle(NULL)
+#endif // _WIN64
+
 #pragma endregion
 
 #pragma region Compiler warnings suppression
@@ -74,6 +83,7 @@
     #include "Interfaces/IApplication.hpp"
 
     #include "Global/GlobalLUL.hpp"
+    #include "Global/InternalAPI.hpp"
 #pragma endregion
 
 #pragma warning ( pop )

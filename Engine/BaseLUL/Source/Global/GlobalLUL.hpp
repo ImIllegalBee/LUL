@@ -4,7 +4,7 @@ namespace LUL
 {
     LUL_DLL void SetApp(IApplication* pApp);
 
-    LUL_DLL const IApplication* GetApp();
+    LUL_DLL const LUL::IApplication* GetApp();
 
     LUL_DLL void SetLogDirFmt(const wchar_t* dirFmt);
 

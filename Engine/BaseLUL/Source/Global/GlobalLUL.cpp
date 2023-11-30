@@ -1,6 +1,6 @@
 #include "BaseLUL.h"
 
-const LUL::IApplication* _pApp;
+static LUL::IApplication* _pApp(nullptr);
 
 #pragma region LogFmt
 
@@ -17,9 +17,6 @@ LUL_DLL void LUL::SetApp(IApplication* pApp)
 
 LUL_DLL const LUL::IApplication* LUL::GetApp()
 {
-    if (!_pApp)
-        LUL::Except::Internal(LUL_EXCEPT_INTERNAL_GLOBAL_SPACE_NOT_INITIALIZED);
-
     return _pApp;
 }
 

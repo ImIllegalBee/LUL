@@ -2,25 +2,58 @@
 
 namespace LUL
 {
+    class AppProperties;
+
+    struct LUL_DLL AppSettings
+    {
+    public:
+
+        friend LUL::AppProperties;
+
+    public:
+
+        AppSettings(std::initializer_list<std::wstring> settings);
+
+        AppSettings(std::wstring yourAppName, std::wstring yourAppClass) :
+            AppSettings({ yourAppName, yourAppClass })
+        {}
+
+        ~AppSettings() = default;
+
+    private:
+
+        std::wstring AppName = std::wstring(LUL_STRING_V_SMALL, '\0');
+
+        std::wstring AppClass = std::wstring(LUL_STRING_V_SMALL, '\0');
+
+    };
+
     class LUL_DLL AppProperties
     {
     public:
 
-        AppProperties(IN const std::wstring& appName,
-                      IN const std::wstring& appClass);
+        // Singleton
 
-        AppProperties(IN const std::wstring& appName) :
-            AppProperties(appName, L"default class")
-        {}
+        static AppProperties* Get();
 
-        AppProperties() :
-            AppProperties(L"default name", L"default class")
-        {}
+    private:
+
+        AppProperties() = default;
+
+    public:
+
+        AppProperties(AppProperties&) = delete;
+
+        void operator=(const AppProperties&) = delete;
 
         ~AppProperties() = default;
 
     public:
         
+        /*
+        * Initializes AppProperties and BaseLUL core components. */
+        void Init(const AppSettings& yourSettings);
+
         /*
         * Create file/directory in '%CurrentDirectory%'
         * If the path ends with '\\' or '/' then it's treated as directory
@@ -42,14 +75,14 @@ namespace LUL
         * If the path ends with '\\' or '/' then it's treated as directory
         * else it's treated as file
         * @return True if the path exists. */
-        bool DoesExists(IN const std::wstring& path) const;
+        static bool DoesExists(IN const std::wstring& path);
 
         /*
         * Check if the path exists, if not then create it.
         * If the path ends with '\\' or '/' then it's treated as directory
         * else it's treated as file
         * @return True if whole operation was successful. */
-        bool FindOrCreate(IN const std::wstring& path) const;
+        static bool FindOrCreate(IN const std::wstring& path);
 
     public:
 
@@ -69,9 +102,9 @@ namespace LUL
 
     private:
 
-        bool MakeFile(IN const std::wstring& path) const;
+        static bool MakeFile(IN const std::wstring& path);
 
-        bool MakeDir(IN const std::wstring& path) const;
+        static bool MakeDir(IN const std::wstring& path);
 
         void FindCreatePathLocalAppData();
 
@@ -83,9 +116,8 @@ namespace LUL
         * Properties */
         std::wstring m_AppBootTime = {};
         std::wstring m_AppVersion = {};
-        // Max size for m_AppName and m_AppClass is LUL_STRING_V_SMALL
-        std::wstring m_AppName = std::wstring(LUL_STRING_V_SMALL, '\0');
-        std::wstring m_AppClass = std::wstring(LUL_STRING_V_SMALL, '\0');
+        std::wstring m_AppName = {};
+        std::wstring m_AppClass = {};
 
         /*
         * Paths */

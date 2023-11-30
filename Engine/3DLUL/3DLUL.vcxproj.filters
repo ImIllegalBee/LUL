@@ -9,12 +9,46 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Resources">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="PCH">
       <UniqueIdentifier>{7b78fc7d-e6a2-4c2a-b38b-9e5d5548de41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Private\Interfaces">
+      <UniqueIdentifier>{c9cdf709-9428-4016-9050-4f171e6df336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Interfaces">
+      <UniqueIdentifier>{3bd4e6c9-021c-460d-ad7c-35b112d00bf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\DirectX12">
+      <UniqueIdentifier>{f31540c9-f46f-482d-942b-0820ed19b979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\DirectX12">
+      <UniqueIdentifier>{0f2e6a5a-acfd-4a8c-9559-643b22de4d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Interfaces\IRenderer.hpp">
+      <Filter>Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX12\Renderer.hpp">
+      <Filter>Public\DirectX12</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\3DLUL.h">
+      <Filter>PCH</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Interfaces\IRenderer.cpp">
+      <Filter>Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX12\Renderer.cpp">
+      <Filter>Private\DirectX12</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\3DLUL.cpp">
+      <Filter>PCH</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resources">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Private\Entry">
       <UniqueIdentifier>{2f565bbc-d51c-451e-a550-9b36f6e4aa3c}</UniqueIdentifier>
     </Filter>
@@ -25,12 +21,19 @@
     <Filter Include="Public\Windows">
       <UniqueIdentifier>{2a266e31-0a84-4a0b-9256-bb55aa073d00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Entry\Application.cpp">
       <Filter>Private\Entry</Filter>
     </ClCompile>
     <ClCompile Include="Source\Windows\MainWindow.cpp">
+      <Filter>Private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Windows\SubWindow.cpp">
       <Filter>Private\Windows</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,5 +44,16 @@
     <ClInclude Include="Source\Windows\MainWindow.hpp">
       <Filter>Public\Windows</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Windows\SubWindow.hpp">
+      <Filter>Public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Assets</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\ProjectSettings.resx">
+      <Filter>Assets</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

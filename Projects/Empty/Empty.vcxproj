@@ -86,6 +86,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Engine\3DLUL\3DLUL.vcxproj">
+      <Project>{a72687f7-7440-4fec-9b06-24bc9eb3d366}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Engine\BaseLUL\BaseLUL.vcxproj">
       <Project>{1277a3a6-3b0e-46c9-836a-2273dac7ed7d}</Project>
     </ProjectReference>
@@ -93,10 +96,18 @@
   <ItemGroup>
     <ClCompile Include="Source\Entry\Application.cpp" />
     <ClCompile Include="Source\Windows\MainWindow.cpp" />
+    <ClCompile Include="Source\Windows\SubWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Entry\Application.hpp" />
     <ClInclude Include="Source\Windows\MainWindow.hpp" />
+    <ClInclude Include="Source\Windows\SubWindow.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\ProjectSettings.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

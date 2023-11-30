@@ -106,6 +106,7 @@
     <ClInclude Include="Source\Exceptions\Handling\ExceptHandlLUL.h" />
     <ClInclude Include="Source\Exceptions\Handling\ExceptHandlWin64.h" />
     <ClInclude Include="Source\Global\GlobalLUL.hpp" />
+    <ClInclude Include="Source\Global\InternalAPI.hpp" />
     <ClInclude Include="Source\Interfaces\IApplication.hpp" />
     <ClInclude Include="Source\Interfaces\IDestroyable.hpp" />
     <ClInclude Include="Source\Interfaces\IInitialable.hpp" />
@@ -121,6 +122,7 @@
     <ClCompile Include="Source\Exceptions\Handling\ExceptHandlLUL.cpp" />
     <ClCompile Include="Source\Exceptions\Handling\ExceptHandlWin64.cpp" />
     <ClCompile Include="Source\Global\GlobalLUL.cpp" />
+    <ClCompile Include="Source\Global\InternalAPI.cpp" />
     <ClCompile Include="Source\Interfaces\IApplication.cpp" />
     <ClCompile Include="Source\Interfaces\IDestroyable.cpp" />
     <ClCompile Include="Source\Interfaces\IInitialable.cpp" />

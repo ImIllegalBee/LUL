@@ -8,11 +8,13 @@ namespace LUL::Win64
     class LUL_DLL IBaseWindow
     {
     public:
+
         IBaseWindow() = default;
 
         ~IBaseWindow() = default;
 
     public:
+
         static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         {
             DERIVED_TYPE* pThis = NULL;
@@ -40,6 +42,7 @@ namespace LUL::Win64
         }
 
     protected:
+
         virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) = 0;
 
         bool _Create(PCWSTR windowName, LPCWSTR className)
@@ -71,19 +74,26 @@ namespace LUL::Win64
         }
 
     protected:
+
         HWND m_Hwnd = nullptr;
 
         LUL::Vec2<int32_t> m_WindowSize = { 1200, 800 };
+
     };
 
-    class LUL_DLL IEmptyWindow : public IBaseWindow<IEmptyWindow>
+    class LUL_DLL IEmptyWindow : 
+        public IBaseWindow<IEmptyWindow>,
+        public LUL::IInitialable,
+        public LUL::IUnknown
     {
     public:
+
         IEmptyWindow() = default;
 
         ~IEmptyWindow() = default;
 
     public:
+
         void Create(PCWSTR windowName, LPCWSTR className)
         {
             _Create(windowName, className);
@@ -95,6 +105,7 @@ namespace LUL::Win64
         }
 
     public:
+
         // Getters
 
         const HWND GetHwnd() const { return m_Hwnd; }

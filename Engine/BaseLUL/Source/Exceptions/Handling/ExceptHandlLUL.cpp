@@ -28,7 +28,7 @@ void LUL::Except::Internal(const int32_t& exceptCode)
 
             std::this_thread::sleep_for(500ms);
 
-            GetApp()->GetLogger()->RedoLastLog();
+            // GetApp()->GetLogger()->RedoLastLog();
 
             if (currentInstanceRetries != retries)
                 return;

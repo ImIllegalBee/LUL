@@ -5,14 +5,13 @@
 #include "Interfaces/IWindow.hpp"
 
 #include "Windows/MainWindow.hpp"
+#include "Windows/SubWindow.hpp"
 
 class Application : public LUL::IApplication
 {
 public:
 
-    Application() :
-        IApplication(L"EmptyProject",
-                     L"EmptyClassProject")
+    Application()
     {}
 
     ~Application() = default;
@@ -27,6 +26,8 @@ public:
 
 private:
 
-    MainWindow m_MainWindow = {};
+    std::shared_ptr<MainWindow> m_MainWindow = std::make_shared<MainWindow>();
+
+    std::shared_ptr<SubWindow> m_SubWindow = std::make_shared<SubWindow>();
 
 };

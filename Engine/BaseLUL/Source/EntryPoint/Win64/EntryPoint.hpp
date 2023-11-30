@@ -8,9 +8,9 @@
 
 INT CALLBACK WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, INT cmdshow)
 {
-    auto app = LUL::EntryApplication();
+    auto* app = LUL::EntryApplication();
     LUL::SetApp(app);
-
+    
     if (!LUL::GetApp())
     {
         MessageBox(NULL, L"Application was null!", L"Error at initialization!", MB_ICONEXCLAMATION | MB_OK);

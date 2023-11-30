@@ -4,13 +4,13 @@
 #include "Interfaces/IInitialable.hpp"
 #include "Interfaces/IWindow.hpp"
 
-class MainWindow : public LUL::Win64::IEmptyWindow
+class SubWindow : public LUL::Win64::IEmptyWindow
 {
 public:
 
-    MainWindow() {}
+    SubWindow() {}
 
-    ~MainWindow() {}
+    ~SubWindow() {}
 
 public:
 
