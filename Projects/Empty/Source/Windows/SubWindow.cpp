@@ -4,8 +4,8 @@ void SubWindow::Init()
 {
     this->m_WindowSize = { 600, 400 };
 
-    // Create(L"SubWindow",
-    //        LUL::GetApp()->GetAppCfg()->GetAppClass().c_str());
+    Create(L"SubWindow",
+           LUL::AppProperties::Get()->GetAppClass().c_str());
 
     Show();
 }

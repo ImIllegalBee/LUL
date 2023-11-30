@@ -1,7 +1,7 @@
 #pragma once
 
 #pragma region Log tag macros
-#define LPLAIN LUL::LogTags::Plain
+#define LPLAIN LUL::LogTags::PlainText
 #define LINFO LUL::LogTags::Info
 #define LMESS LUL::LogTags::Message
 #define LWARN LUL::LogTags::Warning
@@ -10,9 +10,9 @@
 #pragma endregion
 
 #ifdef _DEBUG
-    #define L_LOG(tag, fmt, ...) LUL::ApiAddToLogQueue(tag, fmt, __VA_ARGS__)
+#define L_LOG(tag, fmt, ...) LUL::ApiAddToLogQueue(tag, fmt, __VA_ARGS__)
 #else
-    #define L_LOG(tag, fmt, ...) 
+#define L_LOG(tag, fmt, ...) 
 #endif // _DEBUG
 
 namespace LUL
@@ -46,7 +46,7 @@ namespace LUL
 
         void operator=(Logger&) = delete;
 
-        ~Logger() = default;
+        ~Logger();
 
     public:
 
@@ -78,9 +78,9 @@ namespace LUL
         * Clean old file threaded, called in constructor */
         void CleanOldFileThreaded();
 
-        void FmtStrFromTag(OUT wchar_t* str,
-                           IN const LogTags& tag,
-                           OPTIONAL IN const tm when = LUL::Time::TimeNow()) const;
+        static void FmtStrFromTag(OUT wchar_t* str,
+                                  IN const LogTags& tag,
+                                  OPTIONAL IN const tm when = LUL::Time::TimeNow());
 
         void LoggingLoop();
 
@@ -99,7 +99,7 @@ namespace LUL
         std::thread m_CleanOldThread = {};
 
         std::atomic_bool m_UseSeparateThread = false;
-        std::shared_ptr<std::thread> m_SeparateThread = std::make_shared<std::thread>();
+        std::thread m_SeparateThread = {};
         std::shared_ptr<std::queue<std::tuple<tm, LogTags, std::wstring>>> m_SepareteThreadFIFOQueue = \
             std::make_shared<std::queue<std::tuple<tm, LogTags, std::wstring>>>();
 

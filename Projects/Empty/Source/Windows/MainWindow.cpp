@@ -2,8 +2,8 @@
 
 void MainWindow::Init()
 {
-    // Create(LUL::GetApp()->GetAppCfg()->GetAppName().c_str(),
-    //        LUL::GetApp()->GetAppCfg()->GetAppClass().c_str());
+    Create(LUL::AppProperties::Get()->GetAppName().c_str(),
+           LUL::AppProperties::Get()->GetAppClass().c_str());
 
     Show();
 }

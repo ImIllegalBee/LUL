@@ -6,6 +6,11 @@ LUL::Logger* LUL::Logger::Get()
     return &m_Instance;
 }
 
+LUL::Logger::~Logger()
+{
+    KillSeparateThread();
+}
+
 void LUL::Logger::Init()
 {
     namespace llt = LUL::Time;
@@ -100,7 +105,7 @@ void LUL::Logger::RedoLastLog() const
 void LUL::Logger::SpawnSeparateThread()
 {
     if (m_UseSeparateThread.load() ||
-        m_SeparateThread->joinable())
+        m_SeparateThread.joinable())
     {
         AddToLogQueue(LogTags::Warning, L"Separate thread for logger is already on!");
 
@@ -108,24 +113,30 @@ void LUL::Logger::SpawnSeparateThread()
     }
 
     m_UseSeparateThread.store(true);
-    std::thread newThread(&LUL::Logger::LoggingLoop, this);
-    m_SeparateThread->swap(newThread);
-    newThread.~thread();
+    m_SeparateThread = std::thread(&LUL::Logger::LoggingLoop, this);
 }
 
 void LUL::Logger::KillSeparateThread()
 {
     if (m_UseSeparateThread.load() ||
-        m_SeparateThread->joinable())
+        m_SeparateThread.joinable())
     {
-        while (!m_SepareteThreadFIFOQueue->empty())
-        {
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        }
-
         m_UseSeparateThread.store(false);
 
-        m_SeparateThread->join();
+        while (!m_SepareteThreadFIFOQueue->empty())
+        {
+            auto& first = m_SepareteThreadFIFOQueue->front();
+            wchar_t tagBuff[ LUL_STRING_V_SMALL ] = { 0 };
+
+            FmtStrFromTag(tagBuff, std::get<1>(first), std::get<0>(first));
+
+            Log(LPLAIN, ( tagBuff + std::get<2>(first) ).c_str());
+
+            m_SepareteThreadFIFOQueue->pop();
+        }
+
+        m_SeparateThread.join();
+        m_CleanOldThread.join();
     }
 }
 
@@ -206,12 +217,10 @@ void LUL::Logger::CleanOldFileThreaded()
         return;
     }
 
-    std::thread newThread(&LUL::Logger::CleanOldFiles, this);
-    m_CleanOldThread.swap(newThread);
-    newThread.~thread();
+    m_CleanOldThread = std::thread(&LUL::Logger::CleanOldFiles, this);
 }
 
-void LUL::Logger::FmtStrFromTag(OUT wchar_t* str, IN const LogTags& tag, OPTIONAL IN const tm when) const
+void LUL::Logger::FmtStrFromTag(OUT wchar_t* str, IN const LogTags& tag, OPTIONAL IN const tm when)
 {
     if (tag == PlainText)
         return;
@@ -263,11 +272,13 @@ void LUL::Logger::FmtStrFromTag(OUT wchar_t* str, IN const LogTags& tag, OPTIONA
 
 void LUL::Logger::LoggingLoop()
 {
+    static auto logPath = m_LogPath;
+
     while (m_UseSeparateThread.load())
     {
         if (m_SepareteThreadFIFOQueue->empty())
         {
-            std::this_thread::sleep_for(std::chrono::milliseconds(450));
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
             continue;
         }
 
@@ -277,7 +288,7 @@ void LUL::Logger::LoggingLoop()
 
         FmtStrFromTag(tagBuff, std::get<1>(first), std::get<0>(first));
 
-        std::wofstream logFile(m_LogPath,
+        std::wofstream logFile(logPath,
                                std::ios_base::out | std::ios_base::app);
 
         if (!logFile.is_open())
