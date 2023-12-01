@@ -39,6 +39,12 @@
     <ClInclude Include="Source\3DLUL.h">
       <Filter>PCH</Filter>
     </ClInclude>
+    <ClInclude Include="Source\DirectX12\d3dx12.h">
+      <Filter>Public\DirectX12</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectX12\Hardware.hpp">
+      <Filter>Public\DirectX12</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Interfaces\IRenderer.cpp">
@@ -49,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="Source\3DLUL.cpp">
       <Filter>PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectX12\Hardware.cpp">
+      <Filter>Private\DirectX12</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

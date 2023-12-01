@@ -42,7 +42,7 @@ LUL::AppProperties* LUL::AppProperties::Get()
     return &m_Instance;
 }
 
-void LUL::AppProperties::Init(const AppSettings& yourSettings)
+void LUL::AppProperties::InitCoreLULComponents(const AppSettings& yourSettings)
 {
     // It's already initialized
     if (!m_AppName.empty())

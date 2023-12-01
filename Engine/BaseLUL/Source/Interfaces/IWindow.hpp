@@ -52,7 +52,7 @@ namespace LUL::Win64
             wcex.cbSize = sizeof(WNDCLASSEX);
             wcex.style = CS_HREDRAW | CS_VREDRAW;
             wcex.lpfnWndProc = DERIVED_TYPE::WindowProc;
-            wcex.hInstance = HINSTANCE();
+            wcex.hInstance = HInstance();
             wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
             wcex.lpszClassName = className;
 
@@ -67,7 +67,7 @@ namespace LUL::Win64
                                   m_WindowSize.y,
                                   nullptr,
                                   nullptr,
-                                  HINSTANCE(),
+                                  HInstance(),
                                   this);
 
             return ( m_Hwnd ? true : false );

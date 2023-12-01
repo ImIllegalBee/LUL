@@ -47,9 +47,13 @@
     #define MEM_MB(x)   MEM_KB(x * 1024)
 
     /* 
-    * Controls if BaseLUL should use multithreaded
+    * Should BaseLUL use multithreaded
     * versions of core components */
     #define LUL_IS_CORE_MULTITHREADED true
+
+    #define LUL_INITIALIZE_CORE(...)   LUL::AppProperties::Get()->InitCoreLULComponents(__VA_ARGS__);
+
+    #define LUL_INITIALIZE_CORE_LIST(...)   LUL::AppProperties::Get()->InitCoreLULComponents(__VA_ARGS__);
 
 #ifdef _WIN64
     #define	HInstance() GetModuleHandle(NULL)

@@ -55,7 +55,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LUL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LUL_EXPORTS;_DX12;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -97,11 +97,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\3DLUL.cpp" />
-    <ClCompile Include="Source\DirectX12\Renderer.cpp" />
+    <ClCompile Include="Source\DirectX12\Hardware.cpp" />
+    <ClCompile Include="Source\DirectX12\Renderer.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NDEBUG;_LUL_EXPORTS;_DX12;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="Source\Interfaces\IRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\3DLUL.h" />
+    <ClInclude Include="Source\DirectX12\d3dx12.h" />
+    <ClInclude Include="Source\DirectX12\Hardware.hpp" />
     <ClInclude Include="Source\DirectX12\Renderer.hpp" />
     <ClInclude Include="Source\Interfaces\IRenderer.hpp" />
   </ItemGroup>

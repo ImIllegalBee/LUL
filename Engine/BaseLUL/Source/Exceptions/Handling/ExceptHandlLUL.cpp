@@ -6,7 +6,7 @@ void LUL::Except::Internal(const int32_t& exceptCode)
     {
         case ( LUL_EXCEPT_INTERNAL_NOT_IMPL ):
         {
-            // L_LOG(LERR, L"THROWING LUL_EXCEPT_INTERNAL_NOT_IMPL");
+            L_LOG(LERR, L"THROWING LUL_EXCEPT_INTERNAL_NOT_IMPL");
             throw "LUL_EXCEPT_INTERNAL_NOT_IMPL";
         }
 
@@ -28,19 +28,19 @@ void LUL::Except::Internal(const int32_t& exceptCode)
 
             std::this_thread::sleep_for(500ms);
 
-            // GetApp()->GetLogger()->RedoLastLog();
+            Logger::Get()->RedoLastLog();
 
             if (currentInstanceRetries != retries)
                 return;
 
-            // L_Log(LWARN, L"LUL_EXCEPTION_ACCESS_VIOLATION_LOGGER_FILE succeded after %d retry/ies", retries);
+            L_LOG(LWARN, L"LUL_EXCEPTION_ACCESS_VIOLATION_LOGGER_FILE succeded after %d retry/ies", retries);
             retries = 0;
             return;
         }
 
         default:
         {
-            // L_LOG(LERR, L"THROW UNKOWN EXECPTION");
+            L_LOG(LERR, L"THROW UNKOWN EXECPTION");
             throw "THROW UNKOWN EXECPTION";
         }
     }

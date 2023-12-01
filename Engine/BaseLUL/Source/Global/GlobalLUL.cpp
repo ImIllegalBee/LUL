@@ -2,12 +2,14 @@
 
 static LUL::IApplication* _pApp(nullptr);
 
-#pragma region LogFmt
+#pragma region Logging formats
 
 wchar_t _LogDirFmt[ LUL_STRING_V_BIG ] = { 0 };
 wchar_t _LogFileFmt[ LUL_STRING_V_BIG ] = { 0 };
 
-LUL_DLL void LUL::SetApp(IApplication* pApp)
+#pragma endregion
+
+void LUL::SetApp(IApplication* pApp)
 {
     if (!_pApp)
         _pApp = pApp;
@@ -15,7 +17,7 @@ LUL_DLL void LUL::SetApp(IApplication* pApp)
         LUL::Except::Internal(LUL_EXCEPT_INTERNAL_GLOBAL_SPACE_ACC_VIOL);
 }
 
-LUL_DLL const LUL::IApplication* LUL::GetApp()
+const LUL::IApplication* LUL::GetApp()
 {
     return _pApp;
 }
@@ -76,4 +78,3 @@ void LUL::RunLiveLogger()
     LUL::Except::Internal(LUL_EXCEPT_INTERNAL_NOT_IMPL);
 }
 
-#pragma endregion

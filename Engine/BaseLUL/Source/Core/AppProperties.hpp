@@ -52,7 +52,7 @@ namespace LUL
         
         /*
         * Initializes AppProperties and BaseLUL core components. */
-        void Init(const AppSettings& yourSettings);
+        void InitCoreLULComponents(const AppSettings& yourSettings);
 
         /*
         * Create file/directory in '%CurrentDirectory%'

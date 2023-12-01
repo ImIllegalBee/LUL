@@ -32,3 +32,9 @@ void LUL::Except::Win64::FromLastError(OPTIONAL OUT bool* isGood)
         }
     }
 }
+
+void LUL::Except::Win64::ThrowIfFailed(IN HRESULT result)
+{
+    if (FAILED(result))
+        throw;
+}
