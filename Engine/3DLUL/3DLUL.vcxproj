@@ -108,6 +108,7 @@
     <ClInclude Include="Source\DirectX12\d3dx12.h" />
     <ClInclude Include="Source\DirectX12\Hardware.hpp" />
     <ClInclude Include="Source\DirectX12\Renderer.hpp" />
+    <ClInclude Include="Source\DirectX12\Vertex.h" />
     <ClInclude Include="Source\Interfaces\IRenderer.hpp" />
   </ItemGroup>
   <ItemGroup>

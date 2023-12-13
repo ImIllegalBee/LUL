@@ -38,6 +38,15 @@ void LUL::Except::Internal(const int32_t& exceptCode)
             return;
         }
 
+        case ( LUL_EXCEPT_INTERNAL_LOG_NOT_INIT ):
+        {
+            #ifdef _WIN64
+            // Throw message box with error()
+            #endif // _WIN64
+
+            throw;
+        }
+
         default:
         {
             L_LOG(LERR, L"THROW UNKOWN EXECPTION");

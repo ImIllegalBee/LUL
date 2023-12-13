@@ -32,6 +32,16 @@ INT CALLBACK WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, INT cmd
     }
 
     app->Destroy();
+
+    // Application isn't running anymore
+    LUL::SetApp(nullptr);
+
+    // Destroy singletons
+    {
+        LUL::Logger::Get()->~Logger();
+        LUL::AppProperties::Get()->~AppProperties();
+    }
+
     return 0;
 }
 

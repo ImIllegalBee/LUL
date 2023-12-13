@@ -9,8 +9,14 @@ void LUL::ApiAddToLogQueue(IN const LogTags tag, IN const wchar_t* fmt, ...)
     vswprintf_s(fmtBuff, fmt, args);
     va_end(args);
 
-    if (LUL_IS_CORE_MULTITHREADED)
+    // We can log on multiple threads only when the application is running
+    if (LUL_IS_CORE_MULTITHREADED &&
+        LUL::GetApp())
+    {
         LUL::Logger::Get()->AddToLogQueue(tag, fmtBuff);
+    }
     else
+    {
         LUL::Logger::Get()->Log(tag, fmtBuff);
+    }
 }

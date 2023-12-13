@@ -39,7 +39,7 @@ namespace LUL::Win64
 
     private:
 
-        // D3DX
+        // D3D12
 
         std::shared_ptr<LUL::Win64::Hardware> m_Hardware = std::make_shared<LUL::Win64::Hardware>();
 

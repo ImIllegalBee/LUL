@@ -45,6 +45,9 @@
     <ClInclude Include="Source\DirectX12\Hardware.hpp">
       <Filter>Public\DirectX12</Filter>
     </ClInclude>
+    <ClInclude Include="Source\DirectX12\Vertex.h">
+      <Filter>Public\DirectX12</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Interfaces\IRenderer.cpp">

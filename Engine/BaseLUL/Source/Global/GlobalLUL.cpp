@@ -2,16 +2,17 @@
 
 static LUL::IApplication* _pApp(nullptr);
 
-#pragma region Logging formats
+#pragma region Logger globals
+static wchar_t _LogDirFmt[ LUL_STRING_V_BIG ] = { 0 };
+static wchar_t _LogFileFmt[ LUL_STRING_V_BIG ] = { 0 };
 
-wchar_t _LogDirFmt[ LUL_STRING_V_BIG ] = { 0 };
-wchar_t _LogFileFmt[ LUL_STRING_V_BIG ] = { 0 };
-
+static wchar_t _LogPath[ LUL_PATH ] = { 0 };
+static wchar_t _LogFile[ LUL_PATH ] = { 0 };
 #pragma endregion
 
 void LUL::SetApp(IApplication* pApp)
 {
-    if (!_pApp)
+    if (!_pApp || pApp == nullptr)
         _pApp = pApp;
     else
         LUL::Except::Internal(LUL_EXCEPT_INTERNAL_GLOBAL_SPACE_ACC_VIOL);
@@ -50,6 +51,32 @@ const wchar_t* LUL::GetLogFileFmt()
 
     wcscat_s(_LogFileFmt, L"%h-%m-%s.log");
     return _LogFileFmt;
+}
+
+void LUL::SetLogPath(const wchar_t* source)
+{
+    if (_LogPath[ 0 ] == L'\0')
+        wcscpy_s(_LogPath, source);
+    else
+        LUL::Except::Internal(LUL_EXCEPT_INTERNAL_GLOBAL_SPACE_ACC_VIOL);
+}
+
+const wchar_t* LUL::GetLogPath()
+{   
+    return _LogPath;
+}
+
+void LUL::SetLogFile(const wchar_t* source)
+{
+    if (_LogFile[ 0 ] == L'\0')
+        wcscpy_s(_LogFile, source);
+    else
+        LUL::Except::Internal(LUL_EXCEPT_INTERNAL_GLOBAL_SPACE_ACC_VIOL);
+}
+
+const wchar_t* LUL::GetLogFile()
+{
+    return _LogFile;
 }
 
 void LUL::RunLiveLogger()

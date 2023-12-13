@@ -1,8 +1,8 @@
 #include "3DLUL.h"
 
-USING_DX12();
+#include "Vertex.h"
 
-namespace Excep64 = LUL::Except::Win64;
+USING_DX12();
 
 void LogDX12(D3D12_MESSAGE_CATEGORY Category,
              D3D12_MESSAGE_SEVERITY Severity,
@@ -106,28 +106,16 @@ void LogDX12(D3D12_MESSAGE_CATEGORY Category,
         }
         default:
         {
-            categoryStr = "UNKOWN";
+            categoryStr = "UNKNOWN";
             break;
         }
     }
 
-    if (LUL_IS_CORE_MULTITHREADED)
-    {
-        // Default API uses multithreaded logger
-        LUL::ApiAddToLogQueue(logType,
-                              L"[ DX12 ][ %S ][ ID = %d ] %S",
-                              categoryStr.c_str(),
-                              ID,
-                              pDescription);
-    }
-    else
-    {
-        LUL::Logger::Get()->Log(logType,
-                                L"[ DX12 ][ %S ][ ID = %d ] %S",
-                                categoryStr.c_str(),
-                                ID,
-                                pDescription);
-    }
+    LUL::ApiAddToLogQueue(logType,
+                          L"[ DX12 ][ %S ][ ID = %d ] %S",
+                          categoryStr.c_str(),
+                          ID,
+                          pDescription);
 }
 
 
@@ -152,6 +140,8 @@ void LUL::Win64::DXRenderer::Render()
 
 void LUL::Win64::DXRenderer::Destroy()
 {
+    m_Hardware->~Hardware();
+
     ReportLiveObjects();
 }
 
@@ -174,12 +164,12 @@ void LUL::Win64::DXRenderer::LoadPipeline()
     #endif // _DEBUG
 
     ComPtr<IDXGIFactory> factory = 0;
-    Excep64::ThrowIfFailed(CreateDXGIFactory(IID_PPV_ARGS(&factory)));
+    Excpt64::ThrowIfFailed(CreateDXGIFactory(IID_PPV_ARGS(&factory)));
 
     ComPtr<IDXGIFactory2> factory2 = 0;
     if (SUCCEEDED(factory->QueryInterface(IID_PPV_ARGS(&factory2))))
     {
-        Excep64::ThrowIfFailed(CreateDXGIFactory2(dxgiFactoryFlags, IID_PPV_ARGS(&factory2)));
+        Excpt64::ThrowIfFailed(CreateDXGIFactory2(dxgiFactoryFlags, IID_PPV_ARGS(&factory2)));
 
         if (factory2.Get())
         {
@@ -192,16 +182,16 @@ void LUL::Win64::DXRenderer::LoadPipeline()
 
     #ifdef _DEBUG
     {
-        // ComPtr<ID3D12InfoQueue1> infoQueue = 0;
-        // m_pHardware->GetDevice()->QueryInterface(IID_PPV_ARGS(&infoQueue));
-        // DWORD cookie = 0;
-        // if (infoQueue)
-        //     infoQueue->RegisterMessageCallback(LogDX12,
-        //                                        D3D12_MESSAGE_CALLBACK_FLAG_NONE,
-        //                                        nullptr,
-        //                                        &cookie);
-        // if (!cookie)
-        //     L_LOG(LERR, L"Couldn't start DX12 debug message callback.");
+        ComPtr<ID3D12InfoQueue1> infoQueue = 0;
+        m_Hardware->GetDevice()->QueryInterface(IID_PPV_ARGS(&infoQueue));
+        DWORD cookie = 0;
+        if (infoQueue)
+            infoQueue->RegisterMessageCallback(LogDX12,
+                                               D3D12_MESSAGE_CALLBACK_FLAG_NONE,
+                                               nullptr,
+                                               &cookie);
+        if (!cookie)
+            L_LOG(LERR, L"Couldn't start DX12 debug message callback.");
     }
     #endif // _DEBUG
 }
@@ -213,10 +203,10 @@ void LUL::Win64::DXRenderer::ReportLiveObjects()
 {
     L_LOG(LINFO, L"ReportLiveObjects \\/\\/\\/\\/\\/\\/\\/\\/\\/ ");
 
-    Microsoft::WRL::ComPtr<IDXGIDebug1> dxgi_debug;
-    if (SUCCEEDED(DXGIGetDebugInterface1(0, IID_PPV_ARGS(dxgi_debug.GetAddressOf()))))
+    Microsoft::WRL::ComPtr<IDXGIDebug1> dxgiDebug = 0;
+    if (SUCCEEDED(DXGIGetDebugInterface1(0, IID_PPV_ARGS(dxgiDebug.GetAddressOf()))))
     {
-        dxgi_debug->ReportLiveObjects(DXGI_DEBUG_ALL, DXGI_DEBUG_RLO_FLAGS(DXGI_DEBUG_RLO_DETAIL | DXGI_DEBUG_RLO_IGNORE_INTERNAL));
+        dxgiDebug->ReportLiveObjects(DXGI_DEBUG_ALL, DXGI_DEBUG_RLO_FLAGS(DXGI_DEBUG_RLO_DETAIL | DXGI_DEBUG_RLO_IGNORE_INTERNAL));
     }
 
     L_LOG(LINFO, L"ReportLiveObjects ^^^^^^^^^^ ");

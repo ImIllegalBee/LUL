@@ -25,14 +25,20 @@
 #pragma comment(lib, "kernel32")
 
 #ifndef USING_DX12
-#define USING_DX12()            \
-using namespace DirectX;        \
-using Microsoft::WRL::ComPtr;   \
-using Microsoft::WRL::WeakRef; 
+#define USING_DX12()                    \
+using namespace DirectX;                \
+using Microsoft::WRL::ComPtr;           \
+using Microsoft::WRL::WeakRef;          \
+namespace Excpt64 = LUL::Except::Win64; 
 #endif // !USING_DX12
 
 #endif // _DX12
 
+#pragma region Compiler warnings suppression
+#pragma warning ( push )
+// Warning C4251 class needs to have dll - interface to be used by clients of class 
+#pragma warning ( disable : 4251)
+#pragma endregion
 
 #pragma region Engine includes
 
@@ -43,3 +49,5 @@ using Microsoft::WRL::WeakRef;
 #endif // _DX12
 
 #pragma endregion
+
+#pragma warning ( pop )

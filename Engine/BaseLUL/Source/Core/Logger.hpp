@@ -95,7 +95,7 @@ namespace LUL
         std::wstring m_LogPath = {};
         std::wstring m_LogFileName = {};
 
-        // If any of them are '0' then the check in CleaOldFiles is skipped.
+        // If any of them are '0' then the CleanOldFiles is skipped.
         int32_t m_FileLifeSpanDays = 1;
         int32_t m_FileLifeSpanHours = 0;
 

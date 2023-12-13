@@ -3,6 +3,9 @@
 LUL::Logger* LUL::Logger::Get()
 {
     static Logger m_Instance;
+    if (m_Instance.GetOutputFilePath().empty())
+        m_Instance.Init();
+
     return &m_Instance;
 }
 
@@ -18,6 +21,21 @@ void LUL::Logger::Init()
     // It's already initialized
     if (!m_LogFileName.empty())
         return;
+
+    // If we have already paths stored in global, that means
+    // that aplication was initialized before.
+    // We are probably remaking this singleton.
+    if (LUL::GetLogPath()[ 0 ] != L'\0')
+    {
+        m_LogPath = LUL::GetLogPath();
+        m_LogFileName = LUL::GetLogFile();
+
+        m_SepareteThreadFIFOQueue = \
+            std::make_shared<std::queue<std::tuple<tm, LogTags, std::wstring>>>();
+
+        LUL::Logger::Log(LWARN, L"Remaking logger singleton");
+        return;
+    }
 
     // Create Logs dir in appdata
     m_LogPath += L"Logs\\";
@@ -52,6 +70,8 @@ void LUL::Logger::Init()
     m_LogPath = AppProperties::Get()->GetAppDataPath();
     m_LogPath += tmpFullPath;
 
+    LUL::SetLogPath(m_LogPath.c_str());
+    LUL::SetLogFile(m_LogFileName.c_str());
 
     if (LUL_IS_CORE_MULTITHREADED)
     {
@@ -94,6 +114,9 @@ void LUL::Logger::Log(IN const LogTags tag, IN const wchar_t* fmt, ...) const
 
 void LUL::Logger::AddToLogQueue(IN const LogTags tag, IN const wchar_t* str) const
 {
+    if (m_LogFileName.empty())
+        LUL::Except::Internal(LUL_EXCEPT_INTERNAL_LOG_NOT_INIT);
+
     m_SepareteThreadFIFOQueue->push(std::make_tuple(LUL::Time::TimeNow(), tag, str));
 }
 
@@ -122,25 +145,24 @@ void LUL::Logger::KillSeparateThread()
         m_SeparateThread.joinable())
     {
         m_UseSeparateThread.store(false);
-
-        while (!m_SepareteThreadFIFOQueue->empty())
-        {
-            auto& first = m_SepareteThreadFIFOQueue->front();
-            wchar_t tagBuff[ LUL_STRING_V_SMALL ] = { 0 };
-
-            FmtStrFromTag(tagBuff, std::get<1>(first), std::get<0>(first));
-
-            Log(LPLAIN, ( tagBuff + std::get<2>(first) ).c_str());
-
-            m_SepareteThreadFIFOQueue->pop();
-        }
-
         m_SeparateThread.join();
     }
 
     if (m_CleanOldThread.joinable())
     {
         m_CleanOldThread.join();
+    }
+
+    while (!m_SepareteThreadFIFOQueue->empty())
+    {
+        auto& first = m_SepareteThreadFIFOQueue->front();
+        wchar_t tagBuff[ LUL_STRING_V_SMALL ] = { 0 };
+
+        FmtStrFromTag(tagBuff, std::get<1>(first), std::get<0>(first));
+
+        Log(LPLAIN, ( tagBuff + std::get<2>(first) ).c_str());
+
+        m_SepareteThreadFIFOQueue->pop();
     }
 }
 
