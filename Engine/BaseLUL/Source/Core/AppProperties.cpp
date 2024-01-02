@@ -55,7 +55,7 @@ void LUL::AppProperties::InitCoreLULComponents(const AppSettings& yourSettings)
     FindCreatePathLocalAppData();
     FindPathCurentDir();
 
-    Logger::Get()->Init();
+    Logger::Get();
 }
 
 bool LUL::AppProperties::MakeFileCurDir(IN const std::wstring& path) const

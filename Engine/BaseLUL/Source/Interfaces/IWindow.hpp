@@ -2,6 +2,10 @@
 
 #ifdef _WIN64
 
+#pragma warning ( push )
+// Warning C4251 class needs to have dll - interface to be used by clients of class 
+#pragma warning ( disable : 4251)
+
 namespace LUL::Win64
 {
     template<class DERIVED_TYPE>
@@ -45,7 +49,7 @@ namespace LUL::Win64
 
         virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) = 0;
 
-        bool _Create(PCWSTR windowName, LPCWSTR className)
+        bool _Create()
         {
             WNDCLASSEX wcex = { 0 };
 
@@ -54,12 +58,12 @@ namespace LUL::Win64
             wcex.lpfnWndProc = DERIVED_TYPE::WindowProc;
             wcex.hInstance = HInstance();
             wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-            wcex.lpszClassName = className;
+            wcex.lpszClassName = m_WindowClass.c_str();
 
             RegisterClassEx(&wcex);
 
-            m_Hwnd = CreateWindow(className,
-                                  windowName,
+            m_Hwnd = CreateWindow(m_WindowClass.c_str(),
+                                  m_WindowName.c_str(),
                                   WS_OVERLAPPEDWINDOW,
                                   CW_USEDEFAULT,
                                   CW_USEDEFAULT,
@@ -79,11 +83,14 @@ namespace LUL::Win64
 
         LUL::Vec2<int32_t> m_WindowSize = { 1200, 800 };
 
+        std::wstring m_WindowName = L"";
+        std::wstring m_WindowClass = L"";
     };
 
     class LUL_DLL IEmptyWindow : 
         public IBaseWindow<IEmptyWindow>,
         public LUL::IInitialable,
+        public LUL::IDestroyable,
         public LUL::IUnknown
     {
     public:
@@ -96,12 +103,24 @@ namespace LUL::Win64
 
         void Create(PCWSTR windowName, LPCWSTR className)
         {
-            _Create(windowName, className);
+            m_WindowName = windowName;
+            m_WindowClass = className;
+
+            LUL::ApiAddToLogQueue(LINFO, L"Creating window '%ls'", m_WindowName.c_str());
+
+            _Create();
         }
 
         void Show()
         {
+            LUL::ApiAddToLogQueue(LINFO, L"Showing window '%ls'", m_WindowName.c_str());
+
             ShowWindow(m_Hwnd, SW_NORMAL);
+        }
+
+        void CallDestroy()
+        {
+            LUL::ApiAddToLogQueue(LINFO, L"Destroying window '%ls'", m_WindowName.c_str());
         }
 
     public:
@@ -114,4 +133,7 @@ namespace LUL::Win64
 
     };
 }
+
+#pragma warning ( pop )
+
 #endif // _WIN64

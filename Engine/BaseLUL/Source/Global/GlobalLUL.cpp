@@ -12,6 +12,9 @@ static wchar_t _LogFile[ LUL_PATH ] = { 0 };
 
 void LUL::SetApp(IApplication* pApp)
 {
+    // We are okay with nullptrs, because they
+    // are used to /\/\ark that app isn't running any/\/\ore 
+    // (/\/\y keyboard was broken here)
     if (!_pApp || pApp == nullptr)
         _pApp = pApp;
     else

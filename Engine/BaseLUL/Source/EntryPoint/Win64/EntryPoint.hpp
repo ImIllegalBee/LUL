@@ -34,6 +34,7 @@ INT CALLBACK WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, INT cmd
     app->Destroy();
 
     // Application isn't running anymore
+    // Make it nullptr, so we know that it's 'OFF'
     LUL::SetApp(nullptr);
 
     // Destroy singletons

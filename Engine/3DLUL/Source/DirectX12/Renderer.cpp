@@ -180,6 +180,7 @@ void LUL::Win64::DXRenderer::LoadPipeline()
 
     m_Hardware->Initialize(factory);
 
+    // Initialize debug message callback
     #ifdef _DEBUG
     {
         ComPtr<ID3D12InfoQueue1> infoQueue = 0;
@@ -194,6 +195,8 @@ void LUL::Win64::DXRenderer::LoadPipeline()
             L_LOG(LERR, L"Couldn't start DX12 debug message callback.");
     }
     #endif // _DEBUG
+
+
 }
 
 void LUL::Win64::DXRenderer::LoadAssets()

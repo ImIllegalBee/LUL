@@ -141,16 +141,21 @@ void LUL::Logger::SpawnSeparateThread()
 
 void LUL::Logger::KillSeparateThread()
 {
+    if (m_CleanOldThread.joinable())
+    {
+        m_CleanOldThread.join();
+    }
+
     if (m_UseSeparateThread.load() ||
         m_SeparateThread.joinable())
     {
         m_UseSeparateThread.store(false);
         m_SeparateThread.join();
     }
-
-    if (m_CleanOldThread.joinable())
+    else
     {
-        m_CleanOldThread.join();
+        // There souldn't be anything left to do
+        return;
     }
 
     while (!m_SepareteThreadFIFOQueue->empty())

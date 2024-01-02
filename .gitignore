@@ -1,3 +1,5 @@
 ﻿/.vs
 /Bin64/
 /Obj64/
+/Tools/LogViewer/bin/
+/Tools/LogViewer/obj/

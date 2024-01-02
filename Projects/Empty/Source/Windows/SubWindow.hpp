@@ -16,6 +16,11 @@ public:
 
     void Init() override;
 
+    void Destroy() override
+    {
+        CallDestroy();
+    }
+
     LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
 };
