@@ -28,8 +28,8 @@ void Application::Destroy()
 {
     L_LOG(LINFO, L"Destroy application");
 
-    m_MainWindow->Destroy();
     m_SubWindow->Destroy();
+    m_MainWindow->Destroy();
 
     m_Renderer->Destroy();
 }

@@ -7,6 +7,65 @@
         mc:Ignorable="d"
         Title="Log Viewer" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition MinHeight="300"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="108" Width="*" Name="LeftColumnDefinition"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Height="20" Width="{Binding ElementName=LeftColumnDefinition, Path=Width}"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     Margin="12"
+                     Text="Path to file..."
+                     Foreground="Gray"
+                     Name="PathToFileTextBox"
+                     PreviewMouseDown="PathToFileTextBox_PreviewMouseDown"
+                     PreviewTextInput="PathToFileTextBox_PreviewTextInput">
+            </TextBox>
+            <Button Height="25" Width="90" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="12"
+                    Content="Set path"
+                    Grid.Column="1"
+                    Click="OnButtonSetPath"/>
+        </Grid>
 
+        <Grid Grid.Row="1" Background="Black" Margin="12,0,12,0">
+            <ScrollViewer 
+                Name="MainOutViewScrl"
+                Background="#211f1f"
+                VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBlock 
+                            Name="MainOutViewCount"
+                            Foreground="White"
+                            HorizontalAlignment="Center"
+                            Margin="10"/>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBlock 
+                            Name="MainOutView"
+                            Foreground="White"
+                            Margin="10"/>
+                    </Grid>                        
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <TextBlock Name="PathTextDisplay"
+                Text="" VerticalAlignment="Center" Margin="10,0,0,0"/>
+        </Grid>
     </Grid>
 </Window>

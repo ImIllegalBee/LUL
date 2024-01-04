@@ -118,9 +118,10 @@ namespace LUL::Win64
             ShowWindow(m_Hwnd, SW_NORMAL);
         }
 
-        void CallDestroy()
+        void Destroy() override
         {
             LUL::ApiAddToLogQueue(LINFO, L"Destroying window '%ls'", m_WindowName.c_str());
+            CloseWindow(m_Hwnd);
         }
 
     public:

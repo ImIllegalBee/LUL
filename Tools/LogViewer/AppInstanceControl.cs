@@ -37,8 +37,32 @@ namespace LogViewer
 
         public void SetPathGlobally(string path)
         {
+            new Task(() =>
+            {
+                if (_CountChangedPath == 0)
+                {
+                    using (StreamReader sr = new StreamReader(_GlobalControlPath))
+                    {
+                        _CountChangedPath = 0;
+                        try
+                        {
+                            _CountChangedPath = Convert.ToUInt32(sr.ReadLine());
+                        }
+                        catch { }
+                    }
+                }
 
+                using (StreamWriter sw = new StreamWriter(_GlobalControlPath, false))
+                {
+                    sw.WriteLine(_CountChangedPath++);
+                    sw.WriteLine(path);
+                    sw.Close();
+                }
+
+            }).Start();
         }
+
+        public string GlobalControlPath { get => _GlobalControlPath; }
 
         public bool IsRunning { get => _IsRunning; }
 
@@ -71,5 +95,6 @@ namespace LogViewer
         private bool _IsRunning = false;
         private const string _AppName = "LogViewer";
         private string _GlobalControlPath = "";
+        private uint _CountChangedPath = 1;
     }
 }
