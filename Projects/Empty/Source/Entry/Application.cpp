@@ -9,6 +9,7 @@ void Application::Init()
         L"An application" });
 
     L_LOG(LINFO, L"Create application");
+    LUL::RunLiveLogger();
 
     m_MainWindow->Init();
    

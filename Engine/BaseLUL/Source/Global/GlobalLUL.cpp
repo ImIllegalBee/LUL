@@ -88,8 +88,9 @@ void LUL::RunLiveLogger()
 
     std::wstring cmdW = {};
     cmdW += L"start ";
-    cmdW += AppProperties::Get()->GetAppCurPath().c_str();
-    cmdW += L"\\Tools\\LiveLogger.exe ";
+    std::wstring cPath = AppProperties::Get()->GetAppCurPath();
+    cPath = cPath.substr(0, cPath.find(L"Bin64")) + L"Tools\\LogViewer\\bin\\Release\\net8.0-windows10.0.17763.0\\LogViewer.exe ";
+    cmdW += cPath;
     cmdW += L"/Path \"";
     cmdW += Logger::Get()->GetOutputFilePath();
     cmdW += L"\"";
@@ -100,7 +101,7 @@ void LUL::RunLiveLogger()
     system(std::string(cmdW.begin(), cmdW.end()).c_str());
     #pragma warning ( pop )
 
-    L_LOG(LINFO, L"Launch LiveLogger from cmd ['%ls']", cmdW);
+    L_LOG(LINFO, L"Launch LiveLogger from cmd ['%ls']", cmdW.c_str());
     
     return;
     #endif // _WIN64

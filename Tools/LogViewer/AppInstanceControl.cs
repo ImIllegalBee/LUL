@@ -39,14 +39,15 @@ namespace LogViewer
         {
             new Task(() =>
             {
-                if (_CountChangedPath == 0)
+                if (_CountChangedPath == 1)
                 {
                     using (StreamReader sr = new StreamReader(_GlobalControlPath))
                     {
-                        _CountChangedPath = 0;
+                        _CountChangedPath = 1;
                         try
                         {
                             _CountChangedPath = Convert.ToUInt32(sr.ReadLine());
+                            _CountChangedPath++;
                         }
                         catch { }
                     }

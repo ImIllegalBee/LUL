@@ -43,6 +43,15 @@ namespace LogViewer
                 }
             }
 
+            for (int i = 0; i < e.Args.Length; i++)
+            {
+                if (e.Args[i] == "/Path" &&
+                    i + 1 < e.Args.Length)
+                {
+                    _InstanceCtrl.SetPathGlobally(e.Args[i + 1]);
+                }
+            }
+
             _MainWindow = new MainWindow();
             _MainWindow.Show();
 

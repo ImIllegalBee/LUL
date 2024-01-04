@@ -90,6 +90,8 @@ namespace LUL
 
         void LoggingLoop();
 
+        void PrintHeader();
+
     private:
 
         std::wstring m_LogPath = {};

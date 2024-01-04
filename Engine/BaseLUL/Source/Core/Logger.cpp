@@ -82,6 +82,8 @@ void LUL::Logger::Init()
     {
         CleanOldFiles();
     }
+
+    PrintHeader();
 }
 
 void LUL::Logger::Log(IN const LogTags tag, IN const wchar_t* fmt, ...) const
@@ -331,4 +333,13 @@ void LUL::Logger::LoggingLoop()
 
         m_SepareteThreadFIFOQueue->pop();
     }
+}
+
+void LUL::Logger::PrintHeader()
+{
+    Log(LPLAIN, L"---------------------------------------------------");
+    Log(LPLAIN, L"");
+    Log(LPLAIN, L"%ls", LUL::AppProperties::Get()->GetAppName().c_str());
+    Log(LPLAIN, L"");
+    Log(LPLAIN, L"---------------------------------------------------");
 }
