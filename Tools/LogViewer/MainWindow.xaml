@@ -49,14 +49,12 @@
                     <Grid Grid.Column="0">
                         <TextBlock 
                             Name="MainOutViewCount"
-                            Foreground="White"
                             HorizontalAlignment="Center"
                             Margin="10"/>
                     </Grid>
                     <Grid Grid.Column="1">
                         <TextBlock 
                             Name="MainOutView"
-                            Foreground="White"
                             Margin="10"/>
                     </Grid>                        
                 </Grid>

@@ -4,7 +4,7 @@ DECLARE_APPLICATION(Application);
 
 void Application::Init()
 {
-    LUL_INITIALIZE_CORE_LIST({ 
+    LUL_INITIALIZE_CORE({ 
         L"An empty application", 
         L"An application" });
 

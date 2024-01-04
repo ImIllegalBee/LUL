@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Windows.Media;
 
@@ -22,14 +21,9 @@ namespace LogViewer
 
         static public LogLine Empty => new LogLine(string.Empty);
 
-        public Brush? Brush { get => _brush; }
+        public Brush Brush { get => _brush; set => _brush = value; }
 
         public string Line { get => _line; }
-
-        public void SetBrush(Brush b)
-        {
-            _brush = b;
-        }
 
         // Private ------------------------------------------------------------
 
@@ -200,7 +194,11 @@ namespace LogViewer
                 for (int i = 0; i < ll.Count; i++)
                 {
                     if (ll[i].Line.ToLower().Contains("info"))
-                        ll[i].SetBrush(Brushes.Green);
+                        ll[i] = new LogLine(Brushes.LightGreen, ll[i].Line);
+                    if (ll[i].Line.ToLower().Contains("warning"))
+                        ll[i] = new LogLine(Brushes.Yellow, ll[i].Line);
+                    if (ll[i].Line.ToLower().Contains("error"))
+                        ll[i] = new LogLine(Brushes.Red, ll[i].Line);
                 }
 
                 _ThreadSleep = _DefaultThreadSleep;
