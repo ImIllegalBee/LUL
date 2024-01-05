@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LogViewer"
         mc:Ignorable="d"
         Title="Log Viewer" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#050f0f">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition MinHeight="300"/>
@@ -46,7 +46,7 @@
                         <ColumnDefinition Width="60"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
+                    <Grid Grid.Column="0" Background="#110f0f">
                         <TextBlock 
                             Name="MainOutViewCount"
                             HorizontalAlignment="Center"

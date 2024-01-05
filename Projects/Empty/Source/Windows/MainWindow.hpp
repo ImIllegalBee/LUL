@@ -6,6 +6,8 @@
 
 class MainWindow : public LUL::Win64::IEmptyWindow
 {
+    ANNOUNCE_AS_IUNKNOWN(MainWindow);
+
 public:
 
     MainWindow() {}
@@ -17,5 +19,4 @@ public:
     void Init() override;
 
     LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) override;
-
 };
